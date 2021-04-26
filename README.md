@@ -1,5 +1,7 @@
 # upload_images_converter
-Converter for images from image/* to webp, jpg, png on client side
+Crop and convert images from image/* to webp, jpg, png on client side
+Defaul resolution 500 * 500, made for ratio 1:1, but you can try another :)
+Resolution can be changed by function parameters
 
 How to use, example:
 
