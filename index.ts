@@ -49,72 +49,77 @@ const imageConvert = async (
                     // Getting 2D context from canvas
                     const can = tempCanvas.getContext("2d") as CanvasRenderingContext2D;
                     // Check image ratio
+                    debugger;
                     if (imageWidth > imageHeight) {
                         const originalCoef = imageWidth / imageHeight; // Original ratio coefficient
                         // Check image ratio from new sizes
                         if (correctWidth > correctHeight) {
-                            const cropCoeif = correctWidth / correctHeight; // New ratio coefficient
-                            if (originalCoef < cropCoeif) {
+                            const cropCoef = correctWidth / correctHeight; // New ratio coefficient
+                            if (originalCoef < cropCoef) {
                                 cropedWidth = Math.floor(imageWidth);
-                                cropedHeight = Math.floor(cropedWidth / cropCoeif);
+                                cropedHeight = Math.floor(cropedWidth / cropCoef);
                                 cropX = Math.floor((imageWidth - cropedWidth) / 2); // Always 0
                                 cropY = Math.floor((imageHeight - cropedHeight) / 2);
-                            } else if (originalCoef > cropCoeif) {
-                                cropedWidth = Math.floor(imageHeight * cropCoeif);
+                            } else if (originalCoef > cropCoef) {
+                                cropedWidth = Math.floor(imageHeight * cropCoef);
                                 cropedHeight = Math.floor(imageHeight);
                                 cropX = Math.floor((imageWidth - cropedWidth) / 2);
                                 cropY = Math.floor((imageHeight - cropedHeight) / 2); // Always 0
                             }
                         } else if (correctWidth < correctHeight) {
-                            const cropCoeif = correctHeight / correctWidth;
-                            if (originalCoef < cropCoeif) {
-                                cropedWidth = Math.floor(imageHeight / cropCoeif);
+                            const cropCoef = correctHeight / correctWidth;
+                            if (originalCoef < cropCoef) {
+                                cropedWidth = Math.floor(imageHeight / cropCoef);
                                 cropedHeight = Math.floor(imageHeight);
                                 cropX = Math.floor((imageWidth - cropedWidth) / 2);
                                 cropY = Math.floor((imageHeight - cropedHeight) / 2); // Always 0
-                            } else if (originalCoef > cropCoeif) {
-                                cropedWidth = Math.floor(imageHeight / cropCoeif);
+                            } else if (originalCoef > cropCoef) {
+                                cropedWidth = Math.floor(imageHeight / cropCoef);
                                 cropedHeight = Math.floor(imageHeight);
                                 cropX = Math.floor((imageWidth - cropedWidth) / 2);
                                 cropY = Math.floor((imageHeight - cropedHeight) / 2); // Always 0
                             }
                         } else {
-                            cropedWidth = imageWidth;
-                            cropedHeight = imageWidth;
+                            cropedWidth = imageHeight;
+                            cropedHeight = imageHeight;
+                            cropX = Math.floor((imageWidth - cropedWidth) / 2);
+                            cropY = Math.floor((imageHeight - cropedHeight) / 2);
                         }
                         
                         can.drawImage(tempImg, cropX, cropY, cropedWidth, cropedHeight, 0, 0, correctWidth, correctHeight);
                     } else if (imageWidth < imageHeight) {
                         const originalCoef = imageHeight / imageWidth; // Original ratio coefficient
                         if (correctWidth > correctHeight) {
-                            const cropCoeif = correctWidth / correctHeight; // New ratio coefficient
-                            if (originalCoef < cropCoeif) {
+                            const cropCoef = correctWidth / correctHeight; // New ratio coefficient
+                            if (originalCoef < cropCoef) {
                                 cropedWidth = Math.floor(imageWidth);
-                                cropedHeight = Math.floor(imageWidth / cropCoeif);
+                                cropedHeight = Math.floor(imageWidth / cropCoef);
                                 cropX = Math.floor((imageWidth - cropedWidth) / 2);
                                 cropY = Math.floor((imageHeight - cropedHeight) / 2);
-                            } else if (originalCoef > cropCoeif) {
+                            } else if (originalCoef > cropCoef) {
                                 cropedWidth = Math.floor(imageWidth);
-                                cropedHeight = Math.floor(imageWidth / cropCoeif);
+                                cropedHeight = Math.floor(imageWidth / cropCoef);
                                 cropX = Math.floor((imageWidth - cropedWidth) / 2);
                                 cropY = Math.floor((imageHeight - cropedHeight) / 2);
                             }
                         } else if (correctWidth < correctHeight) {
-                            const cropCoeif = correctHeight / correctWidth; // New ratio coefficient
-                            if (originalCoef < cropCoeif) {
-                                cropedWidth = Math.floor(imageHeight / cropCoeif);
+                            const cropCoef = correctHeight / correctWidth; // New ratio coefficient
+                            if (originalCoef < cropCoef) {
+                                cropedWidth = Math.floor(imageHeight / cropCoef);
                                 cropedHeight = Math.floor(imageHeight);
                                 cropX = Math.floor((imageWidth - cropedWidth) / 2);
                                 cropY = Math.floor((imageHeight - cropedHeight) / 2);
-                            } else if (originalCoef > cropCoeif) {
+                            } else if (originalCoef > cropCoef) {
                                 cropedWidth = Math.floor(imageWidth);
-                                cropedHeight = Math.floor(imageWidth * cropCoeif);
+                                cropedHeight = Math.floor(imageWidth * cropCoef);
                                 cropX = Math.floor((imageWidth - cropedWidth) / 2);
                                 cropY = Math.floor((imageHeight - cropedHeight) / 2);
                             }
                         } else {
                             cropedWidth = imageWidth;
                             cropedHeight = imageWidth;
+                            cropX = Math.floor((imageWidth - cropedWidth) / 2);
+                            cropY = Math.floor((imageHeight - cropedHeight) / 2);
                         }
 
                         can.drawImage(tempImg, cropX, cropY, cropedWidth, cropedHeight, 0, 0, correctWidth, correctHeight);
