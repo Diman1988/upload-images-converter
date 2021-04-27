@@ -1,9 +1,9 @@
 type IMimoTypes = "image/webp" | "image/jpeg" | "image/jpg" | "image/png";
 const imageConvert = async (
     files: FileList,
-    format: IMimoTypes = "image/webp",
     correctWidth = 500,
-    correctHeight = 500
+    correctHeight = 500,
+    format: IMimoTypes = "image/webp"
 ): Promise<File[]> => {
     const getCanvasesBlob = (
         canvases: HTMLCanvasElement[]
@@ -42,22 +42,82 @@ const imageConvert = async (
                     tempCanvas.width = correctWidth; // Initialaize canvas width
                     tempCanvas.height = correctHeight; // Initialaize canvas height
                     // Init drow parameters
-                    let cropWidth = 0;
-                    let cropHeight = 0;
-                    let cropedSide = 0;
+                    let cropX = 0;
+                    let cropY = 0;
+                    let cropedWidth = 0;
+                    let cropedHeight = 0;
                     // Getting 2D context from canvas
                     const can = tempCanvas.getContext("2d") as CanvasRenderingContext2D;
                     // Check image ratio
                     if (imageWidth > imageHeight) {
-                        cropedSide = imageHeight;
-                        cropWidth = (imageWidth - cropedSide) / 2;
-                        cropHeight = (imageHeight - cropedSide) / 2;
-                        can.drawImage(tempImg, cropWidth, cropHeight, cropedSide, cropedSide, 0, 0, correctWidth, correctHeight);
+                        const originalCoef = imageWidth / imageHeight; // Original ratio coefficient
+                        // Check image ratio from new sizes
+                        if (correctWidth > correctHeight) {
+                            const cropCoeif = correctWidth / correctHeight; // New ratio coefficient
+                            if (originalCoef < cropCoeif) {
+                                cropedWidth = Math.floor(imageWidth);
+                                cropedHeight = Math.floor(cropedWidth / cropCoeif);
+                                cropX = Math.floor((imageWidth - cropedWidth) / 2); // Always 0
+                                cropY = Math.floor((imageHeight - cropedHeight) / 2);
+                            } else if (originalCoef > cropCoeif) {
+                                cropedWidth = Math.floor(imageHeight * cropCoeif);
+                                cropedHeight = Math.floor(imageHeight);
+                                cropX = Math.floor((imageWidth - cropedWidth) / 2);
+                                cropY = Math.floor((imageHeight - cropedHeight) / 2); // Always 0
+                            }
+                        } else if (correctWidth < correctHeight) {
+                            const cropCoeif = correctHeight / correctWidth;
+                            if (originalCoef < cropCoeif) {
+                                cropedWidth = Math.floor(imageHeight / cropCoeif);
+                                cropedHeight = Math.floor(imageHeight);
+                                cropX = Math.floor((imageWidth - cropedWidth) / 2);
+                                cropY = Math.floor((imageHeight - cropedHeight) / 2); // Always 0
+                            } else if (originalCoef > cropCoeif) {
+                                cropedWidth = Math.floor(imageHeight / cropCoeif);
+                                cropedHeight = Math.floor(imageHeight);
+                                cropX = Math.floor((imageWidth - cropedWidth) / 2);
+                                cropY = Math.floor((imageHeight - cropedHeight) / 2); // Always 0
+                            }
+                        } else {
+                            cropedWidth = imageWidth;
+                            cropedHeight = imageWidth;
+                        }
+                        
+                        can.drawImage(tempImg, cropX, cropY, cropedWidth, cropedHeight, 0, 0, correctWidth, correctHeight);
                     } else if (imageWidth < imageHeight) {
-                        cropedSide = imageWidth;
-                        cropWidth = (imageWidth - cropedSide) / 2;
-                        cropHeight = (imageHeight - cropedSide) / 2;
-                        can.drawImage(tempImg, cropWidth, cropHeight, cropedSide, cropedSide, 0, 0, correctWidth, correctHeight);
+                        const originalCoef = imageHeight / imageWidth; // Original ratio coefficient
+                        if (correctWidth > correctHeight) {
+                            const cropCoeif = correctWidth / correctHeight; // New ratio coefficient
+                            if (originalCoef < cropCoeif) {
+                                cropedWidth = Math.floor(imageWidth);
+                                cropedHeight = Math.floor(imageWidth / cropCoeif);
+                                cropX = Math.floor((imageWidth - cropedWidth) / 2);
+                                cropY = Math.floor((imageHeight - cropedHeight) / 2);
+                            } else if (originalCoef > cropCoeif) {
+                                cropedWidth = Math.floor(imageWidth);
+                                cropedHeight = Math.floor(imageWidth / cropCoeif);
+                                cropX = Math.floor((imageWidth - cropedWidth) / 2);
+                                cropY = Math.floor((imageHeight - cropedHeight) / 2);
+                            }
+                        } else if (correctWidth < correctHeight) {
+                            const cropCoeif = correctHeight / correctWidth; // New ratio coefficient
+                            if (originalCoef < cropCoeif) {
+                                cropedWidth = Math.floor(imageHeight / cropCoeif);
+                                cropedHeight = Math.floor(imageHeight);
+                                cropX = Math.floor((imageWidth - cropedWidth) / 2);
+                                cropY = Math.floor((imageHeight - cropedHeight) / 2);
+                            } else if (originalCoef > cropCoeif) {
+                                cropedWidth = Math.floor(imageWidth);
+                                cropedHeight = Math.floor(imageWidth * cropCoeif);
+                                cropX = Math.floor((imageWidth - cropedWidth) / 2);
+                                cropY = Math.floor((imageHeight - cropedHeight) / 2);
+                            }
+                        } else {
+                            cropedWidth = imageWidth;
+                            cropedHeight = imageWidth;
+                        }
+
+                        can.drawImage(tempImg, cropX, cropY, cropedWidth, cropedHeight, 0, 0, correctWidth, correctHeight);
                     } else if (imageWidth === imageHeight) {
                         can.drawImage(tempImg, 0, 0, correctWidth, correctHeight);
                     }
