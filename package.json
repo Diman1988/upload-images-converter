@@ -1,7 +1,7 @@
 {
   "name": "upload_images_converter",
-  "version": "1.2.0",
-  "description": "Function for convert FileList images on input to webp and other formats",
+  "version": "1.2.1",
+  "description": "Simple function for crop and convert image files on input to webp and other formats",
   "main": "dist/index.js",
   "types" : "dist/index.d.ts",
   "scripts": {
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/Diman1988/upload_images_converter.git"
   },
-  "author": "Dmitry Astapovich",
+  "author": "diman7988",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Diman1988/upload_images_converter/issues"
