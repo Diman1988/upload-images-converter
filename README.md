@@ -11,7 +11,7 @@ How to use, example:
     name="file"
     multiple
     onChange={(value): void => {
-      imageConvert(value.target.files)
+      imageConvert(value.target.files) // Options: FileList, Width, Height, MIMO format (string)
           .then(files => {
               // ... do something with new images ...
           });
