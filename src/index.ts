@@ -49,7 +49,6 @@ const imageConvert = async (
                     // Getting 2D context from canvas
                     const can = tempCanvas.getContext("2d") as CanvasRenderingContext2D;
                     // Check image ratio
-                    debugger;
                     if (imageWidth > imageHeight) {
                         const originalCoef = imageWidth / imageHeight; // Original ratio coefficient
                         // Check image ratio from new sizes
@@ -143,7 +142,8 @@ const imageConvert = async (
                 const fileArray = [] as File[]; // Temp array for make list of images (FileList emulator but not readonly)
 
                 for (let i = 0; i < blobs.length; i++) {
-                    const file = new File([blobs[i] as Blob], `image_${i}.webp`, { type: format });
+                    const type = format.substring(format.indexOf("/")+1);
+                    const file = new File([blobs[i] as Blob], `image_${i}.${type}`, { type: format });
                     fileArray.push(file);
                 }
 

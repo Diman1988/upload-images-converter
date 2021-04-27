@@ -1,0 +1,24 @@
+{
+  "name": "upload_images_converter",
+  "version": "1.2.0",
+  "description": "Function for convert FileList images on input to webp and other formats",
+  "main": "dist/index.js",
+  "types" : "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Diman1988/upload_images_converter.git"
+  },
+  "author": "Dmitry Astapovich",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Diman1988/upload_images_converter/issues"
+  },
+  "homepage": "https://github.com/Diman1988/upload_images_converter#readme",
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  }
+}
