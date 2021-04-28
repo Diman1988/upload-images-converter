@@ -1,10 +1,31 @@
-# upload_images_converter
-Crop and convert images from image/* to webp, jpg, png on client side
-Defaul resolution 500 * 500
-Resolution can be changed by function parameters
+<h1>Upload Images Converter</h1>
 
-How to use, example:
+Crop and convert images from image/* to webp, jpg, png on client side before upload them to a server
 
+## Options
+FileList
+Width
+Height
+MIMO image format
+
+## Default options
+Resolution 500 * 500
+Image format webp
+
+## Custom options example
+```
+imageConvert(value.target.files, 750, 450, "image/jpeg")
+.then((files) => ...);
+```
+
+---
+
+# How to use, example:
+
+```
+import { imageConverter } from "upload-images-converter";
+
+// ... code before
 <input
     accept="image/*"
     type="file"
@@ -17,3 +38,7 @@ How to use, example:
           });
     }
 />
+// ... code after
+```
+
+---
