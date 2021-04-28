@@ -42,11 +42,12 @@ var imageConvert = function (files, correctWidth, correctHeight, format) {
     if (correctHeight === void 0) { correctHeight = 500; }
     if (format === void 0) { format = "image/webp"; }
     return __awaiter(void 0, void 0, void 0, function () {
-        var getCanvasesBlob, promises, _loop_1, i, newImages, _a;
+        var getCanvasesBlob_1, promises, _loop_1, i, newImages, _a;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
-                    getCanvasesBlob = function (canvases) {
+                    if (!(files != null)) return [3 /*break*/, 5];
+                    getCanvasesBlob_1 = function (canvases) {
                         var promises = [];
                         canvases.forEach(function (canvas) {
                             promises.push(new Promise(function (resolve, reject) {
@@ -169,6 +170,7 @@ var imageConvert = function (files, correctWidth, correctHeight, format) {
                                         can.drawImage(tempImg, 0, 0, correctWidth, correctHeight);
                                     }
                                     can.scale(width, height); // Scale canvas image by context
+                                    URL.revokeObjectURL(tempImg.src);
                                     resolve(tempCanvas);
                                 };
                                 tempImg.onerror = function () { return reject(new Error("Image load error")); };
@@ -183,7 +185,7 @@ var imageConvert = function (files, correctWidth, correctHeight, format) {
                 case 1:
                     _b.trys.push([1, 3, , 4]);
                     return [4 /*yield*/, Promise.all(promises)
-                            .then(function (canvases) { return getCanvasesBlob(canvases); }) // Converting to blob with format
+                            .then(function (canvases) { return getCanvasesBlob_1(canvases); }) // Converting to blob with format
                             .then(function (blobs) {
                             var fileArray = []; // Temp array for make list of images (FileList emulator but not readonly)
                             for (var i = 0; i < blobs.length; i++) {
@@ -199,7 +201,9 @@ var imageConvert = function (files, correctWidth, correctHeight, format) {
                 case 3:
                     _a = _b.sent();
                     throw new Error("Something wrong with files");
-                case 4: return [2 /*return*/];
+                case 4: return [3 /*break*/, 6];
+                case 5: return [2 /*return*/, Promise.resolve([])];
+                case 6: return [2 /*return*/];
             }
         });
     });

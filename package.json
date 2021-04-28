@@ -1,10 +1,19 @@
 {
   "name": "upload-images-converter",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Simple function for crop by center and convert image files on input element to webp and other MIMO formats",
   "main": "dist/index.js",
-  "types" : "dist/index.d.ts",
-  "keywords": ["react", "webp", "jpeg", "png", "image", "images", "converter", "crop"],
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "react",
+    "webp",
+    "jpeg",
+    "png",
+    "image",
+    "images",
+    "converter",
+    "crop"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
