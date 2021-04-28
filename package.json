@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Diman1988/upload_images_converter.git"
+    "url": "git+https://github.com/Diman1988/upload-images-converter.git"
   },
   "author": "diman7988",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Diman1988/upload_images_converter/issues"
+    "url": "https://github.com/Diman1988/upload-images-converter/issues"
   },
-  "homepage": "https://github.com/Diman1988/upload_images_converter#readme",
+  "homepage": "https://github.com/Diman1988/upload-images-converter#readme",
   "devDependencies": {
     "typescript": "^4.2.4"
   }
