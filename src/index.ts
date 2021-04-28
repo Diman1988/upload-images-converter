@@ -126,6 +126,7 @@ const imageConvert = async (
                         can.drawImage(tempImg, 0, 0, correctWidth, correctHeight);
                     }
                     can.scale(width, height); // Scale canvas image by context
+                    URL.revokeObjectURL(tempImg.src);
                     resolve(tempCanvas);
                 }
                 tempImg.onerror = (): void => reject(new Error("Image load error"));
