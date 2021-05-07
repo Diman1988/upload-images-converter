@@ -1,12 +1,13 @@
-type IMimoTypes = "image/webp" | "image/jpeg" | "image/jpg" | "image/png";
+type IMimeTypes = "image/webp" | "image/jpeg" | "image/jpg" | "image/png";
 const imageConvert = async (
-    files: FileList | null,
-    correctWidth = 500,
-    correctHeight = 500,
-    format: IMimoTypes = "image/webp"
+    files: FileList | null,             // FileList object from input
+    correctWidth = 500,                 // Width for output file
+    correctHeight = 500,                // Height for output file
+    format: IMimeTypes = "image/webp",  // Format for output file (webp could be png for some browsers)
+    showErrors = false,                 // Show in console convert format errors
 ): Promise<File[]> => {
-    if (files != null) {
-        const getCanvasesBlob = (
+    if (files && files !== null) {
+        const getCanvasesBlob = ( // Get blobs from canvases
             canvases: HTMLCanvasElement[]
         ): Promise<Blob[]> => {
             const promises: Promise<Blob>[] = [];
@@ -145,6 +146,9 @@ const imageConvert = async (
 
                     for (let i = 0; i < blobs.length; i++) {
                         const type = format.substring(format.indexOf("/") + 1);
+                        if (showErrors && blobs[i].type !== type) {
+                            console.error(`converted to ${blobs[i].type}, expected ${type}`);
+                        }
                         const file = new File([blobs[i] as Blob], `image_${i}.${type}`, { type: format });
                         fileArray.push(file);
                     }
@@ -152,8 +156,8 @@ const imageConvert = async (
                     return fileArray;
                 })
             return newImages;
-        } catch {
-            throw new Error("Something wrong with files");
+        } catch(error) {
+            throw new Error(`Something wrong with files, error message: ${error}`);
         }
     } else {
         return Promise.resolve([]);
