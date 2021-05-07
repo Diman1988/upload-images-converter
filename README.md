@@ -1,8 +1,8 @@
 <h1>Upload Images Converter</h1>
 
-Crop and convert images from image/\* to webp, jpg, png on client side before upload them to a server.
-Script crops an image by center with proportion from options resolution and scales it.
-!!Important some browsers don't convert to webp and return png file
+<p>Crop and convert images from image/\* to webp, jpg, png on client side before upload them to a server.</p>
+<p>Script crops an image by center with proportion from options resolution and scales it.</p>
+<p>!!Important some browsers don't convert to webp and return png file</p>
 ---
 ## Options
 
@@ -19,7 +19,7 @@ Script crops an image by center with proportion from options resolution and scal
 <div>
     <p>Resolution 500 * 500</p>
     <p>Image format webp</p>
-    <p>Showw errors false</p>
+    <p>Show errors false</p>
 </div>
 
 ## Custom options example

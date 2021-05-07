@@ -160,7 +160,7 @@ const imageConvert = async (
             throw new Error(`Something wrong with files, error message: ${error}`);
         }
     } else {
-        return Promise.resolve([]);
+        return [];
     }
 }
 
