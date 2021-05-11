@@ -1,9 +1,12 @@
 <h1>Upload Images Converter</h1>
 
-<p>Crop and convert images from image/\* to webp, jpg, png on client side before upload them to a server.</p>
+<p>Crop and convert images from image/* to webp, jpg, png on client side before upload them to a server.</p>
 <p>Script crops an image by center with proportion from options resolution and scales it.</p>
 <p>!!Important some browsers don't convert to webp and return png file</p>
+<p>It will logged in error console</p>
+
 ---
+
 ## Options
 
 <div>
@@ -43,7 +46,7 @@ import { imageConverter } from "upload-images-converter";
     name="file"
     multiple
     onChange={(value) => {
-      imageConvert(value.target.files) // Options: FileList, Width, Height, MIMO format (string)
+      imageConvert(value.target.files) // Options: FileList, Width, Height, MIMO format (string), false
           .then(files => {
               // ... do something with new images ...
           });

@@ -37,17 +37,23 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.imageConvert = void 0;
-var imageConvert = function (files, correctWidth, correctHeight, format) {
+var imageConvert = function (files, // FileList object from input
+correctWidth, // Width for output file
+correctHeight, // Height for output file
+format, // Format for output file (webp could be png for some browsers)
+showErrors) {
     if (correctWidth === void 0) { correctWidth = 500; }
     if (correctHeight === void 0) { correctHeight = 500; }
     if (format === void 0) { format = "image/webp"; }
+    if (showErrors === void 0) { showErrors = false; }
     return __awaiter(void 0, void 0, void 0, function () {
-        var getCanvasesBlob_1, promises, _loop_1, i, newImages, _a;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var getCanvasesBlob_1, promises, _loop_1, i, newImages, error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
-                    if (!(files != null)) return [3 /*break*/, 5];
-                    getCanvasesBlob_1 = function (canvases) {
+                    if (!(files && files !== null)) return [3 /*break*/, 5];
+                    getCanvasesBlob_1 = function (// Get blobs from canvases
+                    canvases) {
                         var promises = [];
                         canvases.forEach(function (canvas) {
                             promises.push(new Promise(function (resolve, reject) {
@@ -181,28 +187,31 @@ var imageConvert = function (files, correctWidth, correctHeight, format) {
                     for (i = 0; i < files.length; i++) {
                         _loop_1(i);
                     }
-                    _b.label = 1;
+                    _a.label = 1;
                 case 1:
-                    _b.trys.push([1, 3, , 4]);
+                    _a.trys.push([1, 3, , 4]);
                     return [4 /*yield*/, Promise.all(promises)
                             .then(function (canvases) { return getCanvasesBlob_1(canvases); }) // Converting to blob with format
                             .then(function (blobs) {
                             var fileArray = []; // Temp array for make list of images (FileList emulator but not readonly)
                             for (var i = 0; i < blobs.length; i++) {
                                 var type = format.substring(format.indexOf("/") + 1);
+                                if (showErrors && blobs[i].type !== type) {
+                                    console.error("converted to " + blobs[i].type + ", expected " + type);
+                                }
                                 var file = new File([blobs[i]], "image_" + i + "." + type, { type: format });
                                 fileArray.push(file);
                             }
                             return fileArray;
                         })];
                 case 2:
-                    newImages = _b.sent();
+                    newImages = _a.sent();
                     return [2 /*return*/, newImages];
                 case 3:
-                    _a = _b.sent();
-                    throw new Error("Something wrong with files");
+                    error_1 = _a.sent();
+                    throw new Error("Something wrong with files, error message: " + error_1);
                 case 4: return [3 /*break*/, 6];
-                case 5: return [2 /*return*/, Promise.resolve([])];
+                case 5: return [2 /*return*/, []];
                 case 6: return [2 /*return*/];
             }
         });
