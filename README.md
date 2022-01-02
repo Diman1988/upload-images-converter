@@ -34,7 +34,7 @@ imageConvert(value.target.files, 750, 450, "image/jpeg", true)
 
 ---
 
-# How to use, example:
+## How to use, example:
 
 ```
 import { imageConverter } from "upload-images-converter";
@@ -54,5 +54,17 @@ import { imageConverter } from "upload-images-converter";
 />
 // ... code after
 ```
+
+---
+
+<p>If you wanna treat a coffee for me, please:</p>
+
+![alt text](https://github.com/Diman1988/upload-images-converter/blob/main/doge.png?raw=true)
+
+<p>URI: dogecoin:DSMpJ3upyj1j4yAzx4SFxGf2BJq66QxKQB?label=For%20doge%20and%20lib%20future%20%3A%29&message=Buy%20me%20some%20coffee%20%3A%29</p>
+<p>Address: DSMpJ3upyj1j4yAzx4SFxGf2BJq66QxKQB</p>
+<p>Label: For doge and lib future :)</p>
+<p>Message: Treat a coffee for me :)</p>
+
 
 ---
