@@ -2,3 +2,8 @@ src/
 .vscode/
 node_modules/
 package-lock.json
+.eslintignore
+.eslintrc
+.gitignore
+tsconfig.json
+webpack.config.js
