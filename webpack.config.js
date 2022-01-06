@@ -1,8 +1,13 @@
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.ts',
   mode: 'production',
+  target: 'web',
+  entry: {
+    index: './src/index.ts',
+    wrapper: './src/wrapper.ts'
+  },
   experiments: {
     outputModule: true,
   },
@@ -10,10 +15,16 @@ module.exports = {
     library: {
       type: 'module'
     },
-    filename: 'index.mjs',
+    libraryTarget: 'module',
+    module: true,
+    filename: '[name].mjs',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/dist/',
     clean: true
+  },
+  devServer: {
+    contentBase: "./dist",
+    injectClient: false,
   },
   resolve: {
     extensions: [".ts", ".js"],
@@ -27,4 +38,11 @@ module.exports = {
       }
     ],
   },
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+          { from: 'src/index.html' }
+      ]
+  }),
+  ],
 };
