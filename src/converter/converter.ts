@@ -17,7 +17,7 @@ const converter = async (
           const type = format.substring(format.indexOf('/') + 1);
           const file = new File([blobs[i] as Blob], `image_${i}.${type}`, { type: format });
 
-          if (showErrors && blobs[i].type !== type) {
+          if (showErrors && blobs[i].type !== `image/${type}`) {
             console.error(`converted to ${blobs[i].type}, expected ${type}`);
           }
           fileArray.push(file);
