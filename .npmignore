@@ -8,3 +8,6 @@ package-lock.json
 tsconfig.json
 webpack.config.js
 doge.png
+dist/wrapper.mjs
+dist/wrapper.d.ts
+dist/index.html

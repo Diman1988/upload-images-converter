@@ -1,7 +1,7 @@
 import { imageConvert } from './index';
 
 function wrapper() {
-  console.log('wrapper');
+  console.log('wrapper loaded');
 
   const button = document.getElementById('button') as HTMLInputElement;
 
@@ -9,7 +9,6 @@ function wrapper() {
     button.onchange = function () {
       const files = button.files;
 
-      console.log(files);
       if (files) {
         const before = document.getElementById('before') as HTMLImageElement;
         const after = document.getElementById('after') as HTMLImageElement;
@@ -18,6 +17,7 @@ function wrapper() {
         imageConvert(button.files, 500, 500, 'image/webp', true)
           .then((reslut) => {
             const scale = document.getElementById('scale') as HTMLInputElement;
+
             scale.disabled = false;
             scale.onclick = function () {
               if (before.style.maxWidth !== '100%' && after.style.maxWidth !== '100%') {
@@ -38,7 +38,6 @@ function wrapper() {
 
             before.src = imageUrl;
             before.style.display = 'inline';
-            console.log(before);
 
             return result;
           })
@@ -47,13 +46,10 @@ function wrapper() {
 
             after.src = imageUrl;
             after.style.display = 'inline';
-            console.log(after);
           });
       }
     };
   }
-  console.log(button);
-
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
