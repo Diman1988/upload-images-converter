@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .wrapper-block {
+            margin-top: 10px;
+            max-width: auto;
+        }
+    </style>
+    <title>Image Converter Tool</title>
+</head>
+<body id="app">
+    <h1>Welcome!</h1>
+    <input type="file" value="Button" id="button">
+    <div style="margin-top: 10px;display: flex;">
+        <input disabled type="button" value="Scale Button" id="scale">
+        <p id='label' style="float: left;padding-left: 10px;"></p>
+    </div>
+    <div class="wrapper-block">
+        <img alt="before" id="before" style="display: none;">
+        <BR/>
+        <img alt="after" id="after" style="display: none;">
+    </div>
+</body>
+<footer>
+    <script type="module">
+        import { wrapper } from './wrapper.mjs';
+
+        window.addEventListener('load', wrapper);
+    </script>
+    <!-- <script type="module">
+        import { imageConvert } from './index.mjs'
+
+        window.imageConvertImport = function (
+            files,
+            correctWidth = 500,
+            correctHeight = 500,
+            format = 'image/webp',
+            showErrors = false,  
+        ) {
+            return imageConvert(files, correctWidth, correctHeight, format, showErrors = false);
+        }
+        const button = document.getElementById('button');
+        button.onchange = function() {
+            const files = button.files;
+            console.log(files);
+            if (files) {
+                imageConvertImport(button.files, 500, 500, 'image/png', true)
+                // .then((reslut) => console.log(reslut))
+                .then((result) => {
+                    imageUrl = URL.createObjectURL(result[0]);
+                    const after = document.getElementById('after');
+                    after.src = imageUrl;
+                    console.log(after);
+                })
+            }
+        };
+        console.log(button);
+    </script> -->
+</footer>
+</html>
