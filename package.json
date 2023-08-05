@@ -19,7 +19,8 @@
     "start": "npm run build && webpack serve",
     "publish": "npm run build && npm publish --access public",
     "after-publish": "git tag $npm_package_version && git push --tags",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "test": "cypress run"
   },
   "repository": {
     "type": "git",
@@ -39,10 +40,13 @@
     "eslint-config-airbnb-typescript": "^16.1.0",
     "ts-loader": "^9.2.6",
     "tsconfig-paths": "^3.12.0",
-    "typescript": "^4.5.4",
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^3.11.3"
+    "webpack-dev-server": "^3.11.3",
+    "cypress": "^12.17.3",
+    "cypress-file-upload": "^5.0.8",
+    "typescript": "^5.1.6",
+    "yarn": "^1.22.19"
   },
   "files": [
     "dist"
