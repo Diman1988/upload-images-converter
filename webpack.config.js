@@ -28,6 +28,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.ts'],
+    alias: {
+      '@app': path.resolve(__dirname, 'src/'), // Это разрешает алиас @app для Webpack
+    },
   },
   module: {
     rules: [

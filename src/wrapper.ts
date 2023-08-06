@@ -1,5 +1,5 @@
 import { ImageFormat } from './constants';
-import { imageConvert } from './index';
+import { imageConverter } from './index';
 
 function wrapper() {
   console.log('wrapper loaded');
@@ -22,7 +22,7 @@ function wrapper() {
           showErrors: true,
         };
 
-        imageConvert(parameters)
+        imageConverter(parameters)
           .then((result) => {
             console.log('Loaded with parameters:');
 

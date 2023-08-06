@@ -1,4 +1,4 @@
-import { IMimeTypes } from '../interfaces';
+import { IMimeTypes } from '@app/interfaces';
 
 export const blobsToFiles = async (
   blobs: Blob[],

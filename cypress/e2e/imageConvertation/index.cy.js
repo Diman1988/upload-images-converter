@@ -1,5 +1,5 @@
 import 'cypress-file-upload';
-import { imageConvert } from './../../../src/index';
+import { imageConverter } from './../../../src/index';
 
 describe('Image Convertation Test', () => {
   beforeEach(() => {
@@ -36,7 +36,7 @@ describe('Image Convertation Test', () => {
         const fileInput = win.document.getElementById('fileInput');
 
         cy.wrap(
-          imageConvert({ files: fileInput.files, format: 'image/jpg' }),
+          imageConverter({ files: fileInput.files, format: 'image/jpg' }),
         ).then((convertedFiles) => {
           expect(convertedFiles.length).to.equal(1);
           expect(convertedFiles[0].type).to.equal('image/jpg');
@@ -80,7 +80,7 @@ describe('Image Convertation Test', () => {
         const fileInput = win.document.getElementById('fileInput');
 
         cy.wrap(
-          imageConvert({ files: fileInput.files, format: 'image/jpeg' }),
+          imageConverter({ files: fileInput.files, format: 'image/jpeg' }),
         ).then((convertedFiles) => {
           expect(convertedFiles.length).to.equal(1);
           expect(convertedFiles[0].type).to.equal('image/jpeg');
@@ -124,7 +124,7 @@ describe('Image Convertation Test', () => {
         const fileInput = win.document.getElementById('fileInput');
 
         cy.wrap(
-          imageConvert({ files: fileInput.files, format: 'image/png' }),
+          imageConverter({ files: fileInput.files, format: 'image/png' }),
         ).then((convertedFiles) => {
           expect(convertedFiles.length).to.equal(1);
           expect(convertedFiles[0].type).to.equal('image/png');
@@ -168,7 +168,7 @@ describe('Image Convertation Test', () => {
         const fileInput = win.document.getElementById('fileInput');
 
         cy.wrap(
-          imageConvert({ files: fileInput.files, format: 'image/webp' }),
+          imageConverter({ files: fileInput.files, format: 'image/webp' }),
         ).then((convertedFiles) => {
           expect(convertedFiles.length).to.equal(1);
           expect(convertedFiles[0].type).to.equal('image/webp');

@@ -1,2 +1,2 @@
-export { imageConvert } from './imageConvert';
-export { IMimeTypes, ImageConverter } from './interfaces';
+export { imageConverter } from '@app/imageConverter';
+export { IMimeTypes, ImageConverter } from '@app/interfaces';

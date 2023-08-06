@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "moduleResolution": "node",
     "target": "es6",
     "module": "es6",
@@ -14,12 +15,12 @@
     ],
     "paths": {
       "@app/*": [
-        "./src"
+        "./src/*"
       ]
     }
   },
   "exclude": [
     "node_modules",
-    "cypress"
+    "cypress.config.ts"
   ]
 }

@@ -2,12 +2,13 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
         "outDir": "./dist",
-        "declaration": true
+        "declaration": true,
     },
     "include": [
         "src/index.ts"
     ],
     "exclude": [
-        "src/wrapper.ts"
+        "src/wrapper.ts",
+        "cypress.config.ts"
     ]
 }

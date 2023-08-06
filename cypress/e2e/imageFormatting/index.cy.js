@@ -1,5 +1,5 @@
 import 'cypress-file-upload';
-import { imageConvert } from './../../../src/index';
+import { imageConverter } from './../../../src/index';
 
 describe('Image Formatting Test', () => {
   beforeEach(() => {
@@ -35,7 +35,7 @@ describe('Image Formatting Test', () => {
         // Access the fileInput in the window context
         const fileInput = win.document.getElementById('fileInput');
 
-        cy.wrap(imageConvert({ files: fileInput.files })).then(
+        cy.wrap(imageConverter({ files: fileInput.files })).then(
           (convertedFiles) => {
             expect(convertedFiles.length).to.equal(1);
             expect(convertedFiles[0].type).to.equal('image/webp');
@@ -80,7 +80,7 @@ describe('Image Formatting Test', () => {
         const fileInput = win.document.getElementById('fileInput');
 
         cy.wrap(
-          imageConvert({ files: fileInput.files, width: 1000, height: 700 }),
+          imageConverter({ files: fileInput.files, width: 1000, height: 700 }),
         ).then((convertedFiles) => {
           expect(convertedFiles.length).to.equal(1);
           expect(convertedFiles[0].type).to.equal('image/webp');
@@ -124,7 +124,7 @@ describe('Image Formatting Test', () => {
         const fileInput = win.document.getElementById('fileInput');
 
         cy.wrap(
-          imageConvert({ files: fileInput.files, width: 300, height: 500 }),
+          imageConverter({ files: fileInput.files, width: 300, height: 500 }),
         ).then((convertedFiles) => {
           expect(convertedFiles.length).to.equal(1);
           expect(convertedFiles[0].type).to.equal('image/webp');
@@ -176,7 +176,7 @@ describe('Image Formatting Test', () => {
           // Access the fileInput in the window context
           const fileInput = win.document.getElementById('fileInput');
 
-          cy.wrap(imageConvert({ files: fileInput.files })).then(
+          cy.wrap(imageConverter({ files: fileInput.files })).then(
             (convertedFiles) => {
               expect(convertedFiles.length).to.equal(2);
               convertedFiles.forEach((file, i) => {
@@ -223,8 +223,8 @@ describe('Image Formatting Test', () => {
         // Access the fileInput in the window context
         const fileInput = win.document.getElementById('fileInput');
 
-        // Call the imageConvert function and expect it to throw an error
-        imageConvert({ files: fileInput.files, width: -700, height: 1000 })
+        // Call the imageConverter function and expect it to throw an error
+        imageConverter({ files: fileInput.files, width: -700, height: 1000 })
           .then(() => {
             // The promise should not resolve, so fail the test if it does
             expect.fail('Expected promise to be rejected but it was resolved.');

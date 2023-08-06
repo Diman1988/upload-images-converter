@@ -1,5 +1,5 @@
 import 'cypress-file-upload';
-import { imageConvert } from './../../../src/index';
+import { imageConverter } from './../../../src/index';
 
 describe('Image File Upload Tests', () => {
   beforeEach(() => {
@@ -10,10 +10,10 @@ describe('Image File Upload Tests', () => {
     // Upload a single image file
     cy.get('#fileInput').attachFile('image1_vertical.jpg');
 
-    // Call the imageConvert function
+    // Call the imageConverter function
     cy.window().then((win) => {
       const fileInput = win.document.getElementById('fileInput');
-      cy.wrap(imageConvert({ files: fileInput.files })).then(
+      cy.wrap(imageConverter({ files: fileInput.files })).then(
         (convertedFiles) => {
           // Add assertions for the converted files
           // For example, check the type or dimensions of the image
@@ -31,10 +31,10 @@ describe('Image File Upload Tests', () => {
       'image2_vertical.jpg',
     ]);
 
-    // Call the imageConvert function
+    // Call the imageConverter function
     cy.window().then((win) => {
       const fileInput = win.document.getElementById('fileInput');
-      cy.wrap(imageConvert({ files: fileInput.files })).then(
+      cy.wrap(imageConverter({ files: fileInput.files })).then(
         (convertedFiles) => {
           // Add assertions for the converted files
           // For example, check the type or dimensions of the images
@@ -51,11 +51,11 @@ describe('Image File Upload Tests', () => {
     // Upload a file with an invalid format (e.g., txt file instead of an image)
     cy.get('#fileInput').attachFile('invalid.txt');
 
-    // Call the imageConvert function
+    // Call the imageConverter function
     cy.window().then((win) => {
       const fileInput = win.document.getElementById('fileInput');
 
-      const promise = imageConvert({ files: fileInput.files });
+      const promise = imageConverter({ files: fileInput.files });
 
       // Обработайте ошибку промиса
       return promise.then(
@@ -81,7 +81,7 @@ describe('Image File Upload Tests', () => {
     // Call the imageConvert function
     cy.window().then((win) => {
       const fileInput = win.document.getElementById('fileInput');
-      cy.wrap(imageConvert({ files: fileInput.files })).then(
+      cy.wrap(imageConverter({ files: fileInput.files })).then(
         (convertedFiles) => {
           // Add assertions for the converted files
           // For example, check the type or dimensions of the image
