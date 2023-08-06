@@ -6,9 +6,9 @@ export const drawImageOnCanvas = (
   cropWidth: number,
   cropHeight: number,
   destinationWidth: number,
-  destinationHeight: number
+  destinationHeight: number,
 ) => {
-  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+  const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
   ctx.drawImage(
     img,
     cropX,
@@ -18,6 +18,6 @@ export const drawImageOnCanvas = (
     0,
     0,
     destinationWidth,
-    destinationHeight
+    destinationHeight,
   );
 };

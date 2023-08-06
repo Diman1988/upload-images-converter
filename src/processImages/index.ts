@@ -1,15 +1,14 @@
-import { assertIsNumber, assertIsPositiveNumber } from "../asserts";
-import { drawImageOnCanvas } from "../drowImage";
-import { IMimeTypes } from "../interfaces";
+import { assertIsNumber, assertIsPositiveNumber } from '../asserts';
+import { drawImageOnCanvas } from '../drowImage';
 
 export const processImages = async (
   file: File,
   correctWidth: number,
-  correctHeight: number
+  correctHeight: number,
 ): Promise<HTMLCanvasElement> => {
   return new Promise((resolve, reject) => {
-    assertIsNumber(correctWidth, "correctWidth");
-    assertIsNumber(correctHeight, "correctHeight");
+    assertIsNumber(correctWidth, 'correctWidth');
+    assertIsNumber(correctHeight, 'correctHeight');
 
     assertIsPositiveNumber(correctWidth);
     assertIsPositiveNumber(correctHeight);
@@ -17,14 +16,14 @@ export const processImages = async (
     const tempImg = new Image(); // Img should be created to read file
     tempImg.src = URL.createObjectURL(file); // Convert file to URL
 
-    tempImg.onerror = (): void => reject(new Error("Image load error"));
+    tempImg.onerror = (): void => reject(new Error('Image load error'));
 
     tempImg.onload = (): void => {
       try {
         const imageWidth = tempImg.width;
         const imageHeight = tempImg.height;
         const aspectRatio = imageWidth / imageHeight;
-        const tempCanvas = document.createElement("canvas");
+        const tempCanvas = document.createElement('canvas');
 
         let cropWidth, cropHeight, cropX, cropY;
 
@@ -56,7 +55,7 @@ export const processImages = async (
           cropWidth,
           cropHeight,
           correctWidth,
-          correctHeight
+          correctHeight,
         );
 
         URL.revokeObjectURL(tempImg.src);

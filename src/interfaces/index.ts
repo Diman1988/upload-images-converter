@@ -1,8 +1,8 @@
 export type IMimeTypes =
-  | "image/webp"
-  | "image/jpeg"
-  | "image/jpg"
-  | "image/png";
+  | 'image/webp'
+  | 'image/jpeg'
+  | 'image/jpg'
+  | 'image/png';
 
 export type ImageConverter = {
   files: FileList | null; // FileList object from input

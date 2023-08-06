@@ -1,11 +1,11 @@
-import { IMimeTypes } from "../interfaces";
+import { IMimeTypes } from '../interfaces';
 
 export const blobsToFiles = async (
   blobs: Blob[],
   format: IMimeTypes,
-  showErrors: boolean
+  showErrors: boolean,
 ): Promise<File[]> => {
-  const type = format.substring(format.indexOf("/") + 1);
+  const type = format.substring(format.indexOf('/') + 1);
 
   const fileArray = blobs.map((blob, i) => {
     if (showErrors && blob.type !== format) {
