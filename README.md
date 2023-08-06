@@ -10,11 +10,11 @@
 ## Options
 
 <div>
-    <p>FileList</p>
-    <p>Width</p>
-    <p>Height</p>
-    <p>MIMO image format</p>
-    <p>Show errors</p>
+    <p>FileList - Object from input element</p>
+    <p>Width - number</p>
+    <p>Height - number</p>
+    <p>MIMO image format - default is "image/webp"</p>
+    <p>Show errors - boolean</p>
 </div>
 
 ## Default options
@@ -65,6 +65,5 @@ import { imageConverter } from "upload-images-converter";
 <p>Address: DSMpJ3upyj1j4yAzx4SFxGf2BJq66QxKQB</p>
 <p>Label: For doge and lib future :)</p>
 <p>Message: Treat a coffee for me :)</p>
-
 
 ---

@@ -6,11 +6,14 @@
   "types": "dist/index.d.ts",
   "keywords": [
     "react",
+    "angular",
     "webp",
     "jpeg",
     "png",
     "image",
     "images",
+    "input",
+    "convert",
     "converter",
     "crop"
   ],
