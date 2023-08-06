@@ -1,13 +1,15 @@
 import { ImageFormat } from '../constants';
 
-export function assertIsPositiveNumber(value: any): asserts value is number {
+export function assertIsPositiveNumber(
+  value: unknown,
+): asserts value is number {
   if (typeof value !== 'number' || value <= 0) {
     throw new Error(`Expected a positive number, but received ${value}`);
   }
 }
 
 export function assertIsNumber(
-  value: any,
+  value: unknown,
   paramName: string,
 ): asserts value is number {
   if (typeof value !== 'number') {

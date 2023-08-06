@@ -18,9 +18,10 @@
     "crop"
   ],
   "scripts": {
-    "build": "npm run lint && webpack --config webpack.config.js",
-    "start": "npm run build && webpack serve",
-    "publish": "npm run build && npm publish --access public",
+    "build": "yarn lint && webpack --config webpack.config.js",
+    "build:prod": "webpack --config webpack.prod.config.js",
+    "start": "yarn build && webpack serve",
+    "publish": "yarn build:prod && npm publish --access public",
     "after-publish": "git tag $npm_package_version && git push --tags",
     "lint": "eslint . --ext .ts",
     "test": "cypress run"
@@ -47,6 +48,7 @@
     "eslint-plugin-cypress": "^2.13.3",
     "eslint-plugin-import": "^2.28.0",
     "eslint-plugin-prettier": "^5.0.0",
+    "eslint-webpack-plugin": "^4.0.1",
     "prettier": "^3.0.1",
     "ts-loader": "^9.2.6",
     "tsconfig-paths": "^3.12.0",

@@ -1,19 +1,25 @@
 {
-    "compilerOptions": {
-        "moduleResolution": "node",
-        "target": "es6",
-        "module": "es6",
-        "sourceMap": false,
-        "declaration": true,
-        "outDir": "./dist",
-        "strict": true,
-        "removeComments": true,
-        "lib": [
-            "es2017",
-            "DOM"
-        ],
-        "paths": {
-            "@app/*": ["./src"],
-        }
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "es6",
+    "module": "es6",
+    "sourceMap": false,
+    "declaration": true,
+    "outDir": "./dist",
+    "strict": true,
+    "removeComments": true,
+    "lib": [
+      "es2017",
+      "DOM"
+    ],
+    "paths": {
+      "@app/*": [
+        "./src"
+      ]
     }
+  },
+  "exclude": [
+    "node_modules",
+    "cypress"
+  ]
 }

@@ -1,12 +1,11 @@
 const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   target: 'web',
   entry: {
     index: './src/index.ts',
-    wrapper: './src/wrapper.ts',
   },
   experiments: {
     outputModule: true,
@@ -34,13 +33,17 @@ module.exports = {
       {
         test: /\.(ts|tsx)?$/,
         loader: 'ts-loader',
-        exclude: [/node_modules/, /cypress/, /cypress.config.js/],
+        options: {
+          configFile: 'tsconfig.build.json',
+        },
+        exclude: [/node_modules/, /cypress/],
       },
     ],
   },
   plugins: [
-    new CopyPlugin({
-      patterns: [{ from: 'src/index.html' }],
+    new ESLintPlugin({
+      extensions: ['ts'],
+      files: 'src/index.ts',
     }),
   ],
 };
