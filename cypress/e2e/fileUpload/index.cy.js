@@ -1,7 +1,7 @@
 import "cypress-file-upload";
 import { imageConvert } from "./../../../src/index";
 
-describe("Image Upload Tests", () => {
+describe("Image File Upload Tests", () => {
   beforeEach(() => {
     cy.visit("cypress/fixtures/index.html");
   });
@@ -13,12 +13,14 @@ describe("Image Upload Tests", () => {
     // Call the imageConvert function
     cy.window().then((win) => {
       const fileInput = win.document.getElementById("fileInput");
-      imageConvert(fileInput.files).then((convertedFiles) => {
-        // Add assertions for the converted files
-        // For example, check the type or dimensions of the image
-        expect(convertedFiles[0].type).to.equal("image/webp");
-        // Add other checks as needed
-      });
+      cy.wrap(imageConvert({ files: fileInput.files })).then(
+        (convertedFiles) => {
+          // Add assertions for the converted files
+          // For example, check the type or dimensions of the image
+          expect(convertedFiles[0].type).to.equal("image/webp");
+          // Add other checks as needed
+        }
+      );
     });
   });
 
@@ -32,14 +34,16 @@ describe("Image Upload Tests", () => {
     // Call the imageConvert function
     cy.window().then((win) => {
       const fileInput = win.document.getElementById("fileInput");
-      imageConvert(fileInput.files).then((convertedFiles) => {
-        // Add assertions for the converted files
-        // For example, check the type or dimensions of the images
-        expect(convertedFiles.length).to.equal(2);
-        expect(convertedFiles[0].type).to.equal("image/webp");
-        expect(convertedFiles[1].type).to.equal("image/webp");
-        // Add other checks as needed
-      });
+      cy.wrap(imageConvert({ files: fileInput.files })).then(
+        (convertedFiles) => {
+          // Add assertions for the converted files
+          // For example, check the type or dimensions of the images
+          expect(convertedFiles.length).to.equal(2);
+          expect(convertedFiles[0].type).to.equal("image/webp");
+          expect(convertedFiles[1].type).to.equal("image/webp");
+          // Add other checks as needed
+        }
+      );
     });
   });
 
@@ -50,12 +54,41 @@ describe("Image Upload Tests", () => {
     // Call the imageConvert function
     cy.window().then((win) => {
       const fileInput = win.document.getElementById("fileInput");
-      imageConvert(fileInput.files).then((convertedFiles) => {
-        // Add assertions for the converted files
-        // It is expected that the function will return an empty array as the format is invalid
-        expect(convertedFiles.length).to.equal(0);
-        // Add other checks as needed
-      });
+
+      const promise = imageConvert({ files: fileInput.files });
+
+      // Обработайте ошибку промиса
+      return promise.then(
+        () => {
+          throw new Error(
+            "Expected promise to be rejected but it was resolved."
+          );
+        },
+        (error) => {
+          expect(error.message).to.equal(
+            "Invalid image types detected: text/plain. Supported types are: image/webp, image/jpg, image/jpeg, image/png"
+          );
+          return null; // Чтобы вернуться из ошибки и продолжить цепочку
+        }
+      );
+    });
+  });
+
+  it("should handle if no files selected", () => {
+    // Upload a single image file
+    cy.get("#fileInput");
+
+    // Call the imageConvert function
+    cy.window().then((win) => {
+      const fileInput = win.document.getElementById("fileInput");
+      cy.wrap(imageConvert({ files: fileInput.files })).then(
+        (convertedFiles) => {
+          // Add assertions for the converted files
+          // For example, check the type or dimensions of the image
+          expect(convertedFiles.length).to.equal(0);
+          // Add other checks as needed
+        }
+      );
     });
   });
 });
