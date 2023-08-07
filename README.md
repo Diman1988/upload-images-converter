@@ -74,7 +74,7 @@ import { imageConverter } from "upload-images-converter";
 
 <p>If you wanna say thanks to me, please:</p>
 
-[Click and donate](https://ko-fi.com/diman)
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y4NVM2B)
 
 <p>I like images, but coffee motivate better :)</p>
 
