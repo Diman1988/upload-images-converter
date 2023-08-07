@@ -1,5 +1,12 @@
 import { ImageFormat } from '@app/constants';
 
+/**
+ * Asserts that the provided value is a positive number.
+ *
+ * @param {unknown} value - The value to be validated.
+ *
+ * @throws {Error} - Throws an error if the value is not a positive number.
+ */
 export function assertIsPositiveNumber(
   value: unknown,
 ): asserts value is number {
@@ -8,6 +15,14 @@ export function assertIsPositiveNumber(
   }
 }
 
+/**
+ * Asserts that the provided value is a number.
+ *
+ * @param {unknown} value - The value to be validated.
+ * @param {string} paramName - The name of the parameter for error message.
+ *
+ * @throws {Error} - Throws an error if the value is not a number.
+ */
 export function assertIsNumber(
   value: unknown,
   paramName: string,
@@ -17,6 +32,13 @@ export function assertIsNumber(
   }
 }
 
+/**
+ * Asserts that each file in the FileList has a valid image type.
+ *
+ * @param {FileList} files - The list of files to be validated.
+ *
+ * @throws {Error} - Throws an error if any file's type is not a valid image type.
+ */
 export const assertIsValidImageType = (files: FileList): void => {
   const validFormats = Object.values(ImageFormat);
 

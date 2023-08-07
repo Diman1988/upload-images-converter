@@ -1,0 +1,1 @@
+export { scaleImage } from './scaleImage';

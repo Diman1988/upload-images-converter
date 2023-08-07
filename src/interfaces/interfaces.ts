@@ -11,3 +11,22 @@ export type ImageConverter = {
   format: IMimeTypes; // Format for output file (webp could be png for some browsers)
   showErrors: boolean; // Show in console convert format errors
 };
+
+export type CropValues = {
+  cropX: number;
+  cropY: number;
+  cropedWidth: number;
+  cropedHeight: number;
+};
+
+export type CropResult = {
+  cropX: number;
+  cropY: number;
+  cropWidth: number;
+  cropHeight: number;
+};
+
+export type ScaledValues = {
+  scaledWidth: number;
+  scaledHeight: number;
+};

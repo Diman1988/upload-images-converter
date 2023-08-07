@@ -1,0 +1,1 @@
+export { calculateScaleRatio } from './calculateScaleRatio';
