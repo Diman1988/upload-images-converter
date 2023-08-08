@@ -1,8 +1,8 @@
 import { assertIsValidImageType } from '@app/asserts';
 import { blobsToFiles } from '@app/blobsToFiles';
 import { canvasesToBlobs } from '@app/canvasesToBlobs';
-import { DEFAULT_WIDTH, DEFAULT_HEIGHT, ImageFormat } from '@app/constants';
-import { ImageConverter } from '@app/interfaces';
+import { DEFAULT_WIDTH, DEFAULT_HEIGHT } from '@app/constants';
+import { ImageConverter, MimeTypesEnum } from '@app/interfaces';
 import { prepareDataForProcessing } from '@app/prepareDataForProcessing';
 import { processImages } from '@app/processImages';
 
@@ -21,7 +21,7 @@ export const imageConverter = async ({
   files,
   width = DEFAULT_WIDTH,
   height = DEFAULT_HEIGHT,
-  format = ImageFormat.webp,
+  format = MimeTypesEnum.WEBP,
   showErrors = false,
 }: ImageConverter): Promise<File[]> => {
   if (!files) {

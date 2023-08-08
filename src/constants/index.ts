@@ -1,1 +1,1 @@
-export { ImageFormat, DEFAULT_WIDTH, DEFAULT_HEIGHT } from './constants';
+export { DEFAULT_WIDTH, DEFAULT_HEIGHT } from './constants';

@@ -12,7 +12,9 @@ export enum MimeTypesEnum {
   PNG = 'image/png',
 }
 
-export type IMimeTypes = keyof typeof MimeTypesEnum;
+export type IMimeTypesKeys = keyof typeof MimeTypesEnum;
+
+export type IMimeTypes = (typeof MimeTypesEnum)[keyof typeof MimeTypesEnum];
 
 export type ImageConverter = {
   files: FileList | null; // FileList object from input

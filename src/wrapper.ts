@@ -1,5 +1,5 @@
-import { ImageFormat } from './constants';
 import { imageConverter } from './index';
+import { MimeTypesEnum } from './interfaces';
 
 function wrapper() {
   console.log('wrapper loaded');
@@ -18,7 +18,7 @@ function wrapper() {
           files: button.files,
           width: 500,
           height: 500,
-          format: ImageFormat.webp,
+          format: MimeTypesEnum.WEBP,
           showErrors: true,
         };
 

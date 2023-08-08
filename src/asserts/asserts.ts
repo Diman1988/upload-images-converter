@@ -1,6 +1,4 @@
-import { ImageFormat } from '@app/constants';
-import { IMimeTypes } from '@app/interfaces';
-import { MimeTypesEnum } from '@app/interfaces/interfaces';
+import { IMimeTypes, MimeTypesEnum } from '@app/interfaces';
 
 /**
  * Asserts that the provided value is a positive number.
@@ -71,10 +69,10 @@ export function assertIsNumber(
  * @throws {Error} - Throws an error if any file's type is not a valid image type.
  */
 export const assertIsValidImageType = (files: FileList): void => {
-  const validFormats = Object.values(ImageFormat);
+  const validFormats = Object.values(MimeTypesEnum);
 
   const invalidFiles = Array.from(files).filter(
-    (file) => !validFormats.includes(file.type as ImageFormat),
+    (file) => !validFormats.includes(file.type as MimeTypesEnum),
   );
 
   if (invalidFiles.length > 0) {
