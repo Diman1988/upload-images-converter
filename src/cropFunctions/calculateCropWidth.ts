@@ -1,3 +1,5 @@
+import { assertIsBoolean, assertIsNonNegativeNumber } from '@app/asserts';
+
 /**
  * Calculates the width of the cropped area based on the input image dimensions and target aspect ratio.
  *
@@ -15,8 +17,14 @@ export const calculateCropWidth = (
   imageHeight: number,
   targetRatio: number,
   isImageRatioLessThanTarget: boolean,
-): number =>
+): number => {
+  assertIsNonNegativeNumber(imageWidth);
+  assertIsNonNegativeNumber(imageHeight);
+  assertIsNonNegativeNumber(targetRatio);
+  assertIsBoolean(isImageRatioLessThanTarget, 'isImageRatioLessThanTarget');
+
   // If the image's aspect ratio is less than the target aspect ratio, cropping will be based on width.
-  isImageRatioLessThanTarget
+  return isImageRatioLessThanTarget
     ? imageWidth
     : Math.round(imageHeight * targetRatio); // Otherwise, the image is wider or has the same aspect ratio as the target, so calculate the crop width based on height.
+};

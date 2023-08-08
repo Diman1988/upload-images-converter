@@ -1,8 +1,18 @@
-export type IMimeTypes =
-  | 'image/webp'
-  | 'image/jpeg'
-  | 'image/jpg'
-  | 'image/png';
+// export type IMimeTypes =
+//   | 'image/webp'
+//   | 'image/jpeg'
+//   | 'image/jpg'
+//   | 'image/png';
+
+// TODO: rename later
+export enum MimeTypesEnum {
+  WEBP = 'image/webp',
+  JPEG = 'image/jpeg',
+  JPG = 'image/jpg',
+  PNG = 'image/png',
+}
+
+export type IMimeTypes = keyof typeof MimeTypesEnum;
 
 export type ImageConverter = {
   files: FileList | null; // FileList object from input

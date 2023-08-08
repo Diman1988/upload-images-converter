@@ -1,3 +1,5 @@
+import { assertIsNonNegativeNumber } from '@app/asserts/asserts';
+
 /**
  * Calculates the X-coordinate of the top-left corner of the cropped area based on the input image width and crop width.
  *
@@ -13,4 +15,13 @@ export const calculateCropX = (
   imageWidth: number,
   cropWidth: number,
   isImageRatioLessThanTarget: boolean,
-): number => (isImageRatioLessThanTarget ? 0 : (imageWidth - cropWidth) / 2);
+): number => {
+  assertIsNonNegativeNumber(imageWidth);
+  assertIsNonNegativeNumber(cropWidth);
+
+  if (imageWidth === 0) {
+    return 0;
+  }
+
+  return isImageRatioLessThanTarget ? 0 : (imageWidth - cropWidth) / 2;
+};

@@ -14,7 +14,7 @@ import { calculateCropDimensions } from '@app/calculateCropDimensions';
 /**
  * Calculates the aspect ratio of a given width and height.
  */
-import { calculateRatio } from '@app/calculateRatios';
+import { calculateRatio } from '@app/calculateRatio';
 
 /**
  * Ensures that the calculated crop dimensions are within the bounds of the image.

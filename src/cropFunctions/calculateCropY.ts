@@ -1,3 +1,5 @@
+import { assertIsNonNegativeNumber, assertIsBoolean } from '@app/asserts';
+
 /**
  * Calculates the Y-coordinate of the top-left corner of the cropped area based on the input image height and crop height.
  *
@@ -13,4 +15,14 @@ export const calculateCropY = (
   imageHeight: number,
   cropHeight: number,
   isImageRatioLessThanTarget: boolean,
-): number => (isImageRatioLessThanTarget ? (imageHeight - cropHeight) / 2 : 0);
+): number => {
+  assertIsNonNegativeNumber(imageHeight);
+  assertIsNonNegativeNumber(cropHeight);
+  assertIsBoolean(isImageRatioLessThanTarget, 'isImageRatioLessThanTarget');
+
+  if (cropHeight === 0) {
+    return 0;
+  }
+
+  return isImageRatioLessThanTarget ? (imageHeight - cropHeight) / 2 : 0;
+};

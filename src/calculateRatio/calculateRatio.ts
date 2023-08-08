@@ -1,3 +1,5 @@
+import { assertIsPositiveNumber } from '@app/asserts';
+
 /**
  * Calculates the aspect ratio of an image based on its width and height.
  *
@@ -10,6 +12,10 @@ export const calculateRatio = (
   imageWidth: number,
   imageHeight: number,
 ): number => {
+  assertIsPositiveNumber(imageWidth);
+  assertIsPositiveNumber(imageHeight);
+
   const imageRatio = imageWidth / imageHeight;
+
   return imageRatio;
 };
