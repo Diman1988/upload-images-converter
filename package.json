@@ -1,7 +1,7 @@
 {
   "name": "upload-images-converter",
-  "version": "1.3.2",
-  "description": "Simple function for crop an image by center and convert files from input element to webp and other MIMO formats",
+  "version": "2.0.0",
+  "description": "Simple function for crop an images by center, scale and convert files from input element to webp and other MIMO formats",
   "main": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "keywords": [
@@ -15,7 +15,8 @@
     "input",
     "convert",
     "converter",
-    "crop"
+    "crop",
+    "center"
   ],
   "scripts": {
     "build": "yarn lint && webpack --config webpack.config.js",
@@ -35,8 +36,9 @@
   "bugs": {
     "url": "https://github.com/Diman1988/upload-images-converter/issues"
   },
-  "homepage": "https://github.com/Diman1988/upload-images-converter#readme",
+  "homepage": "https://ko-fi.com/diman",
   "devDependencies": {
+    "@cypress/webpack-preprocessor": "^5.17.1",
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
     "copy-webpack-plugin": "^10.2.0",
