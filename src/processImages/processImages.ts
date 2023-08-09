@@ -1,7 +1,7 @@
 import { assertIsNumber, assertIsPositiveNumber } from '@app/asserts';
 import { calculate } from '@app/calculate';
 import { drawImageOnCanvas } from '@app/drawImageOnCanvas';
-import { scaleImage } from '@app/resizeAndCropImage/scaleImage';
+import { scaleImage } from '@app/scaleImage';
 
 /**
  * Process an image file by resizing, cropping, and drawing it on a canvas.
