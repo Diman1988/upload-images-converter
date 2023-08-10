@@ -7,7 +7,7 @@ import { MimeTypesEnum } from '@app/interfaces';
  *
  * @throws {Error} - Throws an error if any file's type is not a valid image type.
  */
-export const assertIsValidImageType = (files: FileList): void => {
+export const assertIsValidImageType = (files: FileList | File[]): void => {
   const validFormats = Object.values(MimeTypesEnum);
 
   const invalidFiles = Array.from(files).filter(
