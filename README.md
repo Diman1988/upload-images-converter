@@ -1,5 +1,11 @@
 <h1>Upload Images Converter</h1>
 
+- Need to crop and scale image with custom resolution?
+- Resize, scale, convert images on client side before upload on your server?
+- Do you have a different image sizes? Make them similar!
+
+---
+
 <p>Crop, scale and convert images from image/* to webp, jpg, png on client side before upload them to a server.</p>
 <p>Script crops an image by center with proportions of target resolution and scales it.</p>
 <p>!!Important some browsers don't convert to webp and will return png file</p>
@@ -16,7 +22,7 @@ but an object:
 
 ```
 const parameters = {
-    files: input.files,
+    files: input.files, // Or files array
     width: 500, // defalut
     height: 500, // default
     format: ImageFormat.png,
@@ -61,7 +67,7 @@ import { imageConverter } from "upload-images-converter";
     name="file"
     multiple
     onChange={(value) => {
-      imageConvert(value.target.files) // Options: FileList, Width, Height, MIMO format (string), false
+      imageConvert({files: value.target.files}) // Options: FileList, Width, Height, MIMO format (string), false
           .then(files => {
               // ... do something with new images ...
           });
