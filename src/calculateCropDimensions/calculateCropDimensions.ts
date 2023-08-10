@@ -17,23 +17,13 @@ import { CropResult } from '@app/interfaces';
 export const calculateCropDimensions = (
   imageWidth: number,
   imageHeight: number,
-  targetWidth: number,
-  targetHeight: number,
   targetRatio: number,
   imageRatio: number,
 ): CropResult => {
   const isImageRatioEqual = Math.abs(imageRatio - targetRatio) < 0.01;
-  const isImageBiggerThanTarget =
-    imageWidth > targetWidth || imageHeight > targetHeight;
 
   return isImageRatioEqual
-    ? calculateEqualRatioCrop(
-        imageWidth,
-        imageHeight,
-        targetWidth,
-        targetHeight,
-        isImageBiggerThanTarget,
-      )
+    ? calculateEqualRatioCrop(imageWidth, imageHeight)
     : calculateNonEqualRatioCrop(
         imageWidth,
         imageHeight,

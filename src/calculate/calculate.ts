@@ -59,8 +59,6 @@ export const calculate = (
   const cropResult = calculateCropDimensions(
     imageWidth,
     imageHeight,
-    targetWidth,
-    targetHeight,
     targetRatio,
     imageRatio,
   );

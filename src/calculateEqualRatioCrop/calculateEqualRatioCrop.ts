@@ -14,24 +14,11 @@ import { CropResult } from '@app/interfaces';
 export const calculateEqualRatioCrop = (
   imageWidth: number,
   imageHeight: number,
-  targetWidth: number,
-  targetHeight: number,
-  isImageBiggerThanTarget: boolean,
 ): CropResult => {
-  const centeredCropX = (imageWidth - targetWidth) / 2;
-  const centeredCropY = (imageHeight - targetHeight) / 2;
-
-  return isImageBiggerThanTarget
-    ? {
-        cropX: centeredCropX,
-        cropY: centeredCropY,
-        cropWidth: targetWidth,
-        cropHeight: targetHeight,
-      }
-    : {
-        cropX: 0,
-        cropY: 0,
-        cropWidth: imageWidth,
-        cropHeight: imageHeight,
-      };
+  return {
+    cropX: 0,
+    cropY: 0,
+    cropWidth: imageWidth,
+    cropHeight: imageHeight,
+  };
 };

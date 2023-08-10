@@ -12,6 +12,10 @@ export const calculateScaleRatio = (
   targetWidth: number,
   targetHeight: number,
 ): number => {
+  if (cropWidth === 0 || cropHeight === 0) {
+    return 0;
+  }
+
   // Calculate the scale ratio by taking the maximum of the width and height scaling ratios
   return Math.max(targetWidth / cropWidth, targetHeight / cropHeight);
 };
