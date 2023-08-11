@@ -1,6 +1,6 @@
 {
   "name": "upload-images-converter",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Simple function for crop an images by center, scale and convert files from input element to webp and other MIMO formats",
   "main": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -21,8 +21,9 @@
   "scripts": {
     "build": "yarn lint && webpack --config webpack.config.js",
     "build:prod": "webpack --config webpack.prod.config.js",
+    "clean": "node clean.js",
     "start": "yarn build && webpack serve",
-    "publish": "yarn build:prod && npm publish --access public",
+    "publish": "yarn build:prod && yarn clean && npm publish --access public",
     "after-publish": "git tag $npm_package_version && git push --tags",
     "lint": "eslint . --ext .ts",
     "test": "cypress run"
