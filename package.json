@@ -1,6 +1,6 @@
 {
   "name": "upload-images-converter",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Simple function for crop an images by center, scale and convert files from input element to webp and other MIMO formats",
   "main": "dist/index.mjs",
   "types": "dist/index.d.ts",
