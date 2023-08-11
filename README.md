@@ -49,7 +49,15 @@ const parameters = {
 ## Custom options example
 
 ```
-imageConvert(value.target.files, 750, 450, "image/jpeg", true)
+const parameters = {
+    files: input.files, // Or files array
+    width: 500, // defalut
+    height: 500, // default
+    format: ImageFormat.png,
+    showErrors: true,
+}
+
+imageConvert(parameters)
 .then((files) => ...);
 ```
 
