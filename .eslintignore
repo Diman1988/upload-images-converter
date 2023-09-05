@@ -1,3 +1,7 @@
 node_modules
 dist
 webpack.config.js
+webpack.prod.config.js
+cypress.config.ts
+/cypress/support/e2e.ts
+/cypress/support/commands.ts

@@ -1,12 +1,12 @@
-import { imageConvert } from './index';
-import { IMimeTypes } from './interfaces';
+import { imageConverter } from './index';
+import { MimeTypesEnum } from './interfaces';
 
 function wrapper() {
   console.log('wrapper loaded');
 
   const button = document.getElementById('button') as HTMLInputElement;
 
-  if (button){
+  if (button) {
     button.onchange = function () {
       const files = button.files;
 
@@ -14,20 +14,22 @@ function wrapper() {
         const before = document.getElementById('before') as HTMLImageElement;
         const after = document.getElementById('after') as HTMLImageElement;
         const label = document.getElementById('label') as HTMLParagraphElement;
-        const parameters: [FileList | null, number, number, IMimeTypes, boolean] = [button.files, 500, 500, 'image/webp', true];
+        const parameters = {
+          files: button.files,
+          width: 500,
+          height: 500,
+          format: MimeTypesEnum.WEBP,
+          showErrors: true,
+        };
 
-        imageConvert(...parameters)
+        imageConverter(parameters)
           .then((result) => {
             console.log('Loaded with parameters:');
 
-            parameters.forEach((el, index) => {
-              switch (index) {
-                case 1: console.log('Width', el); break;
-                case 2: console.log('Height', el); break;
-                case 3: console.log('Format', el); break;
-                case 4: console.log('Debuggin', el); break;
-              }
-            });
+            console.log('Width', parameters.width);
+            console.log('Height', parameters.height);
+            console.log('Format', parameters.format);
+            console.log('Debugging', parameters.showErrors);
 
             return result;
           })
@@ -36,7 +38,10 @@ function wrapper() {
 
             scale.disabled = false;
             scale.onclick = function () {
-              if (before.style.maxWidth !== '100%' && after.style.maxWidth !== '100%') {
+              if (
+                before.style.maxWidth !== '100%' &&
+                after.style.maxWidth !== '100%'
+              ) {
                 before.style.maxWidth = '100%';
                 after.style.maxWidth = '100%';
                 label.innerText = 'scaled';

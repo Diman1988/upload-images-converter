@@ -1,0 +1,1 @@
+file for test that function doesn't allow to load invalid formats

@@ -1,0 +1,1 @@
+export { prepareDataForProcessing } from './prepareDataForProcessing';

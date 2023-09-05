@@ -1,0 +1,1 @@
+export { canvasToBlob } from './canvasToBlob';

@@ -1,0 +1,1 @@
+export { processImages } from './processImages';

@@ -1,0 +1,25 @@
+{
+  "plugins": [
+    "cypress"
+  ],
+  "env": {
+    "cypress/globals": true
+  },
+  "extends": [
+    "plugin:cypress/recommended"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.cy.js",
+        "*.cy.ts",
+        "*.test.js",
+        "*.spec.js"
+      ],
+      "rules": {
+        "import/no-extraneous-dependencies": "off",
+        "@typescript-eslint/no-unused-expressions": "off"
+      }
+    }
+  ]
+}

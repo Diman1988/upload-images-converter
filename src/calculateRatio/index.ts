@@ -1,0 +1,1 @@
+export { calculateRatio } from './calculateRatio';

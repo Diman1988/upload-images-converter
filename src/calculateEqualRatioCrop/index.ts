@@ -1,0 +1,1 @@
+export { calculateEqualRatioCrop } from './calculateEqualRatioCrop';

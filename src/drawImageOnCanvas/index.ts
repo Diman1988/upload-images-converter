@@ -1,0 +1,1 @@
+export { drawImageOnCanvas } from './drawImageOnCanvas';
