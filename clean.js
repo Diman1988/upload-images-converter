@@ -6,7 +6,7 @@ const filesToKeep = [
   'index.d.ts',
   'interfaces',
   'imageConverter',
-  // Добавьте все файлы, которые нужно сохранить
+  // Add files to keep saved
 ];
 
 const distPath = path.join(__dirname, 'dist');

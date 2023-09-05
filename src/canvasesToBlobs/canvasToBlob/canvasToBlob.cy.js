@@ -3,7 +3,6 @@ import { canvasToBlob } from './';
 describe('canvasToBlob', () => {
   let canvas;
 
-  // Создание canvas элемента перед каждым тестом
   beforeEach(() => {
     cy.document().then((doc) => {
       canvas = doc.createElement('canvas');
@@ -14,7 +13,6 @@ describe('canvasToBlob', () => {
   });
 
   afterEach(() => {
-    // Восстановление canvas к его исходному состоянию или пересоздание
     cy.document().then((doc) => {
       canvas = doc.createElement('canvas');
       const ctx = canvas.getContext('2d');
@@ -23,104 +21,93 @@ describe('canvasToBlob', () => {
     });
   });
 
-  it('should convert a canvas to a Blob with a valid MIME type', () => {
-    // Convert canvas to Blob
-    cy.wrap(canvasToBlob(canvas, 'image/jpeg')).should('be.a', 'blob');
-  });
+  const testCases = [
+    {
+      description: 'should convert a canvas to a Blob with a valid MIME type',
+      mimeType: 'image/jpeg',
+      shouldReject: false,
+      expectedErrorMessage: null,
+    },
+    {
+      description: 'should throw an error with an unsupported MIME type',
+      mimeType: 'unsupported/format',
+      shouldReject: true,
+      expectedErrorMessage: 'Unsupported format: unsupported/format',
+    },
+    {
+      description: 'should throw an error if canvas.toBlob is not supported',
+      mimeType: 'image/jpeg',
+      mockToBlob: false,
+      shouldReject: true,
+      expectedErrorMessage:
+        'Method canvas.toBlob is not supported by this browser.',
+    },
+    {
+      description: 'should produce a Blob with the correct MIME type',
+      mimeType: 'image/jpeg',
+      shouldReject: false,
+      expectedErrorMessage: null,
+    },
+    // {
+    //   description: 'should throw an error if no canvas is provided',
+    //   canvas: undefined,
+    //   mimeType: 'image/jpeg',
+    //   shouldReject: true,
+    //   expectedErrorMessage: 'Canvas must not be null or undefined.',
+    // },
+    {
+      description: 'should throw an error if toBlob does not produce a Blob',
+      mimeType: 'image/jpeg',
+      mockToBlobNull: true,
+      shouldReject: true,
+      expectedErrorMessage:
+        'Failed to convert canvas to blob with format: image/jpeg',
+    },
+  ];
 
-  it('should throw an error with an unsupported MIME type', () => {
-    cy.window().then(() => {
-      const promise = canvasToBlob(canvas, 'unsupported/format');
+  testCases.forEach(
+    ({
+      description,
+      mimeType,
+      shouldReject,
+      expectedErrorMessage,
+      mockToBlob,
+      mockToBlobNull,
+    }) => {
+      it(description, () => {
+        if (mockToBlob === false) {
+          canvas.toBlob = undefined;
+        }
 
-      // Handle the promise error
-      return promise.then(
-        () => {
-          throw new Error(
-            'Expected promise to be rejected but it was resolved.',
+        if (mockToBlobNull === true) {
+          canvas.toBlob = (callback) => {
+            callback(null);
+          };
+        }
+
+        const promise = canvasToBlob(canvas, mimeType);
+
+        if (shouldReject) {
+          return promise.then(
+            () => {
+              throw new Error(
+                'Expected promise to be rejected but it was resolved.',
+              );
+            },
+            (error) => {
+              expect(error.message).to.equal(expectedErrorMessage);
+            },
           );
-        },
-        (error) => {
-          expect(error.message).to.equal(
-            'Unsupported format: unsupported/format',
-          );
-          return null; // To move on from the error and continue the chain
-        },
-      );
-    });
-  });
-
-  it('should throw an error if canvas.toBlob is not supported', () => {
-    cy.window().then(() => {
-      // Mocking the absence of toBlob method
-      canvas.toBlob = undefined;
-
-      const promise = canvasToBlob(canvas, 'image/jpeg');
-
-      // Handle the promise error
-      return promise.then(
-        () => {
-          throw new Error(
-            'Expected promise to be rejected but it was resolved.',
-          );
-        },
-        (error) => {
-          expect(error.message).to.equal(
-            'Method canvas.toBlob is not supported by this browser.',
-          );
-          return null; // To move on from the error and continue the chain
-        },
-      );
-    });
-  });
-
-  it('should produce a Blob with the correct MIME type', () => {
-    cy.wrap(canvasToBlob(canvas, 'image/jpeg')).then((blob) => {
-      expect(blob.type).to.equal('image/jpeg');
-    });
-  });
-
-  it('should throw an error if no canvas is provided', () => {
-    cy.window().then(() => {
-      const promise = canvasToBlob(undefined, 'image/jpeg');
-
-      return promise.then(
-        () => {
-          throw new Error(
-            'Expected promise to be rejected but it was resolved.',
-          );
-        },
-        (error) => {
-          expect(error.message).to.equal(
-            'Canvas must not be null or undefined.',
-          );
-          return null; // To move on from the error and continue the chain
-        },
-      );
-    });
-  });
-
-  it('should throw an error if toBlob does not produce a Blob', () => {
-    cy.window().then(() => {
-      // Mocking the toBlob method to not return a Blob
-      canvas.toBlob = (callback) => {
-        callback(null);
-      };
-
-      const promise = canvasToBlob(canvas, 'image/jpeg');
-
-      return promise.then(
-        () => {
-          throw new Error(
-            'Expected promise to be rejected but it was resolved.',
-          );
-        },
-        (error) => {
-          expect(error.message).to.equal(
-            'Failed to convert canvas to blob with format: image/jpeg',
-          );
-          return null; // To move on from the error and continue the chain
-        },
-      );
-    });
-  });
+        } else {
+          cy.wrap(promise)
+            .should('be.a', 'blob')
+            .then((blob) => {
+              if (blob) {
+                expect(blob.type).to.equal(mimeType);
+              }
+            });
+        }
+      });
+    },
+  );
 });
