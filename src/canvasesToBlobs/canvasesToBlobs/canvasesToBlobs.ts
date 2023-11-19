@@ -1,5 +1,5 @@
 import { IMimeTypes } from '@app/interfaces';
-import { canvasToBlob } from '../canvasToBlob';
+import { CanvasConverter } from '../canvasToBlob';
 
 /**
  * Asynchronously converts an array of HTML canvas elements into an array of Blobs.
@@ -16,8 +16,9 @@ export const canvasesToBlobs = async (
 ): Promise<Blob[]> => {
   // Фильтруем canvases, чтобы убедиться, что все элементы не равны null или undefined
   const validCanvases = canvases.filter(Boolean);
+  const convertion = new CanvasConverter();
 
   return Promise.all(
-    validCanvases.map((canvas) => canvasToBlob(canvas, format)),
+    validCanvases.map((canvas) => convertion.canvasToBlob(canvas, format)),
   );
 };
