@@ -8,8 +8,11 @@ import { processImages } from '@app/processImages';
 
 class ImageConverter {
   private width: number;
+
   private height: number;
+
   private format: MimeTypesEnum;
+
   private showErrors: boolean;
 
   constructor(options?: IImageConverterOptions) {
@@ -19,22 +22,46 @@ class ImageConverter {
     this.showErrors = options?.showErrors || false;
   }
 
-  public async convertImages(files: FileList | File[]): Promise<File[]> {
+  private async canvasesToBlobs(processedImages: HTMLCanvasElement[]) {
+    const canvases = await canvasesToBlobs(processedImages, this.format);
+
+    return canvases;
+  }
+
+  private prepare(files: FileList | File[]) {
+    const preparedData = prepareDataForProcessing(files);
+
+    return preparedData;
+  }
+
+  private async processImages(files: File[]) {
+    const processedImages = await Promise.all(
+      files.map((file) => processImages(file, this.width, this.height)),
+    );
+
+    return processedImages;
+  }
+
+  private async blobsToFiles(blobs: Blob[]) {
+    const fileArray = await blobsToFiles(blobs, this.format, this.showErrors);
+
+    return fileArray;
+  }
+
+  public async convertImages(files: FileList | File[] | null): Promise<File[]> {
     if (!files || files.length === 0) {
       return [];
     }
 
-    assertIsValidImageType(files);
+    assertIsValidImageType(files); // TODO: rename or remaster
 
-    const preparedData = prepareDataForProcessing(files);
+    const preparedData = this.prepare(files);
 
-    const processedImages = await Promise.all(
-      preparedData.map(file => processImages(file, this.width, this.height))
-    );
+    const processedImages = await this.processImages(preparedData);
 
-    const blobs = await canvasesToBlobs(processedImages, this.format);
+    const blobs = await this.canvasesToBlobs(processedImages);
 
-    const fileArray = await blobsToFiles(blobs, this.format, this.showErrors);
+    const fileArray = await this.blobsToFiles(blobs);
 
     return fileArray;
   }
