@@ -9,12 +9,12 @@ export enum MimeTypesEnum {
   WEBP = 'image/webp',
   JPEG = 'image/jpeg',
   JPG = 'image/jpg',
-  PNG = 'image/png'
+  PNG = 'image/png',
 }
 
 export type IMimeTypesKeys = keyof typeof MimeTypesEnum;
 
-export type IMimeTypes = typeof MimeTypesEnum[keyof typeof MimeTypesEnum];
+export type IMimeTypes = (typeof MimeTypesEnum)[keyof typeof MimeTypesEnum];
 
 export type ImageConverter = {
   files: FileList | File[] | null; // FileList object from input

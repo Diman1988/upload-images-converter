@@ -6,5 +6,5 @@ export {
   CropValues,
   CropResult,
   ScaledValues,
-  IImageConverterOptions
+  IImageConverterOptions,
 } from './interfaces';
