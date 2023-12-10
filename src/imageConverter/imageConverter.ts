@@ -7,13 +7,13 @@ import { prepareDataForProcessing } from '@app/prepareDataForProcessing';
 import { processImages } from '@app/processImages';
 
 class ImageConverter {
-  private width: number;
+  protected width: number;
 
-  private height: number;
+  protected height: number;
 
-  private format: MimeTypesEnum;
+  protected format: MimeTypesEnum;
 
-  private showErrors: boolean;
+  protected showErrors: boolean;
 
   constructor(options?: IImageConverterOptions) {
     this.width = options?.width || DEFAULT_WIDTH;
@@ -22,7 +22,7 @@ class ImageConverter {
     this.showErrors = options?.showErrors || false;
   }
 
-  private async canvasesToBlobs(processedImages: HTMLCanvasElement[]) {
+  protected async canvasesToBlobs(processedImages: HTMLCanvasElement[]) {
     const canvases = await canvasesToBlobs(processedImages, this.format);
 
     return canvases;
