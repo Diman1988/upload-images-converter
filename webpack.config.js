@@ -6,7 +6,7 @@ module.exports = {
   target: 'web',
   entry: {
     index: './src/index.ts',
-    wrapper: './src/wrapper.ts',
+    wrapper: './webserver/wrapper.ts',
   },
   experiments: {
     outputModule: true,
@@ -43,7 +43,7 @@ module.exports = {
   },
   plugins: [
     new CopyPlugin({
-      patterns: [{ from: 'src/index.html' }],
+      patterns: [{ from: 'webserver/index.html' }],
     }),
   ],
 };

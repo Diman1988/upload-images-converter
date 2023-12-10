@@ -42,3 +42,10 @@ export type ScaledValues = {
   scaledWidth: number;
   scaledHeight: number;
 };
+
+export interface IImageConverterOptions {
+  width?: number;
+  height?: number;
+  format?: MimeTypesEnum;
+  showErrors?: boolean;
+}

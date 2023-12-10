@@ -8,7 +8,7 @@
         "src/index.ts"
     ],
     "exclude": [
-        "src/wrapper.ts",
+        "webserver",
         "cypress.config.ts"
     ]
 }

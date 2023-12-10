@@ -2,45 +2,69 @@ import { assertIsValidImageType } from '@app/asserts';
 import { blobsToFiles } from '@app/blobsToFiles';
 import { canvasesToBlobs } from '@app/canvasesToBlobs';
 import { DEFAULT_WIDTH, DEFAULT_HEIGHT } from '@app/constants';
-import { ImageConverter, MimeTypesEnum } from '@app/interfaces';
+import { IImageConverterOptions, MimeTypesEnum } from '@app/interfaces'; // Обратите внимание на интерфейс опций
 import { prepareDataForProcessing } from '@app/prepareDataForProcessing';
 import { processImages } from '@app/processImages';
 
-/**
- * Convert images based on provided options.
- *
- * @param files - FileList object from input
- * @param width - Width for output file. Default is DEFAULT_WIDTH.
- * @param height - Height for output file. Default is DEFAULT_HEIGHT.
- * @param format - Format for output file. Default is webp (could be png for some browsers).
- * @param showErrors - If true, will show errors in console. Default is false.
- *
- * @returns An array of processed files.
- */
-export const imageConverter = async ({
-  files,
-  width = DEFAULT_WIDTH,
-  height = DEFAULT_HEIGHT,
-  format = MimeTypesEnum.WEBP,
-  showErrors = false,
-}: ImageConverter): Promise<File[]> => {
-  // const fileList = files instanceof FileList ? Array.from(files) : files;
+class ImageConverter {
+  protected width: number;
 
-  if (!files) {
-    return [];
+  protected height: number;
+
+  protected format: MimeTypesEnum;
+
+  protected showErrors: boolean;
+
+  constructor(options?: IImageConverterOptions) {
+    this.width = options?.width || DEFAULT_WIDTH;
+    this.height = options?.height || DEFAULT_HEIGHT;
+    this.format = options?.format || MimeTypesEnum.WEBP;
+    this.showErrors = options?.showErrors || false;
   }
 
-  assertIsValidImageType(files);
+  protected async canvasesToBlobs(processedImages: HTMLCanvasElement[]) {
+    const canvases = await canvasesToBlobs(processedImages, this.format);
 
-  const preparedData = prepareDataForProcessing(files);
+    return canvases;
+  }
 
-  const processedImages = await Promise.all(
-    preparedData.map((file) => processImages(file, width, height)),
-  );
+  private prepare(files: FileList | File[]) {
+    const preparedData = prepareDataForProcessing(files);
 
-  const blobs = await canvasesToBlobs(processedImages, format);
+    return preparedData;
+  }
 
-  const fileArray = await blobsToFiles(blobs, format, showErrors);
+  private async processImages(files: File[]) {
+    const processedImages = await Promise.all(
+      files.map((file) => processImages(file, this.width, this.height)),
+    );
 
-  return fileArray;
-};
+    return processedImages;
+  }
+
+  private async blobsToFiles(blobs: Blob[]) {
+    const fileArray = await blobsToFiles(blobs, this.format, this.showErrors);
+
+    return fileArray;
+  }
+
+  public async convertImages(files: FileList | File[] | null): Promise<File[]> {
+    if (!files || files.length === 0) {
+      return [];
+    }
+
+    assertIsValidImageType(files); // TODO: rename or remaster
+
+    const preparedData = this.prepare(files);
+
+    const processedImages = await this.processImages(preparedData);
+
+    const blobs = await this.canvasesToBlobs(processedImages);
+
+    const fileArray = await this.blobsToFiles(blobs);
+
+    return fileArray;
+  }
+}
+
+export { ImageConverter };
