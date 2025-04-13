@@ -16,10 +16,10 @@ class ImageConverter {
   protected showErrors: boolean;
 
   constructor(options?: IImageConverterOptions) {
-    this.width = options?.width || DEFAULT_WIDTH;
-    this.height = options?.height || DEFAULT_HEIGHT;
-    this.format = options?.format || MimeTypesEnum.WEBP;
-    this.showErrors = options?.showErrors || false;
+    this.width = options?.width ?? DEFAULT_WIDTH;
+    this.height = options?.height ?? DEFAULT_HEIGHT;
+    this.format = options?.format ?? MimeTypesEnum.WEBP;
+    this.showErrors = options?.showErrors ?? false;
   }
 
   protected async canvasesToBlobs(processedImages: HTMLCanvasElement[]) {
@@ -34,7 +34,7 @@ class ImageConverter {
     return preparedData;
   }
 
-  private async processImages(files: File[]) {
+  protected async processImages(files: File[]) {
     const processedImages = await Promise.all(
       files.map((file) => processImages(file, this.width, this.height)),
     );

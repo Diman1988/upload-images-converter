@@ -6,10 +6,10 @@
 
 // TODO: rename later
 export enum MimeTypesEnum {
-  WEBP = 'image/webp',
   JPEG = 'image/jpeg',
   JPG = 'image/jpg',
   PNG = 'image/png',
+  WEBP = 'image/webp',
 }
 
 export type IMimeTypesKeys = keyof typeof MimeTypesEnum;
