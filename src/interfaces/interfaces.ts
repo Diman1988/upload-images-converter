@@ -7,8 +7,8 @@
 // TODO: rename later
 export enum MimeTypesEnum {
   WEBP = 'image/webp',
-  JPEG = 'image/jpeg',
   JPG = 'image/jpg',
+  JPEG = 'image/jpeg',
   PNG = 'image/png',
 }
 

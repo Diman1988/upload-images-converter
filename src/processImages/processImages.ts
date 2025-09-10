@@ -27,7 +27,10 @@ export const processImages = async (
     tempImg.src = URL.createObjectURL(file); // Convert file to URL
 
     // Handle image load error
-    tempImg.onerror = (): void => reject(new Error('Image load error'));
+    tempImg.onerror = (): void => {
+      URL.revokeObjectURL(tempImg.src);
+      reject(new Error('Image load error'));
+    };
 
     // Handle image load success
     tempImg.onload = (): void => {
@@ -76,9 +79,13 @@ export const processImages = async (
 
         // Resolve the promise with the processed canvas
         resolve(canvas);
-      } catch (error: any) {
+      } catch (error: unknown) {
+        // Clean up URL on error
+        URL.revokeObjectURL(tempImg.src);
         // Reject the promise if any error occurs during image processing
-        reject(new Error(`Image processing error: ${error.message}`));
+        const errorMessage =
+          error instanceof Error ? error.message : 'Unknown error';
+        reject(new Error(`Image processing error: ${errorMessage}`));
       }
     };
   });
