@@ -26,10 +26,21 @@ export const processImages = async (
     const tempImg = new Image();
     tempImg.src = URL.createObjectURL(file); // Convert file to URL
 
+    // Set up timeout for image loading (10 seconds)
+    const timeoutId = setTimeout(() => {
+      URL.revokeObjectURL(tempImg.src);
+      reject(new Error(`Image loading timeout for file: ${file.name}`));
+    }, 10000);
+
+    const cleanup = () => {
+      clearTimeout(timeoutId);
+      URL.revokeObjectURL(tempImg.src);
+    };
+
     // Handle image load error
     tempImg.onerror = (): void => {
-      URL.revokeObjectURL(tempImg.src);
-      reject(new Error('Image load error'));
+      cleanup();
+      reject(new Error(`Image load error for file: ${file.name}`));
     };
 
     // Handle image load success
@@ -75,13 +86,14 @@ export const processImages = async (
         );
 
         // Release resources associated with the temporary image URL
+        clearTimeout(timeoutId);
         URL.revokeObjectURL(tempImg.src);
 
         // Resolve the promise with the processed canvas
         resolve(canvas);
       } catch (error: unknown) {
-        // Clean up URL on error
-        URL.revokeObjectURL(tempImg.src);
+        // Clean up on error
+        cleanup();
         // Reject the promise if any error occurs during image processing
         const errorMessage =
           error instanceof Error ? error.message : 'Unknown error';

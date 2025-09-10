@@ -24,8 +24,6 @@ export const imageConverter = async ({
   format = MimeTypesEnum.WEBP,
   showErrors = false,
 }: ImageConverter): Promise<File[]> => {
-  // const fileList = files instanceof FileList ? Array.from(files) : files;
-
   if (!files) {
     return [];
   }
@@ -40,7 +38,7 @@ export const imageConverter = async ({
 
   const blobs = await canvasesToBlobs(processedImages, format);
 
-  const fileArray = await blobsToFiles(blobs, format, showErrors);
+  const fileArray = blobsToFiles(blobs, format, showErrors);
 
   return fileArray;
 };

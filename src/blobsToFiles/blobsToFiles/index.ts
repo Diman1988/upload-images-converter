@@ -9,15 +9,15 @@ import { blobToFile } from './../blobToFile';
  * @param {IMimeTypes} format - The expected MIME type of the Blobs.
  * @param {boolean} showErrors - If true, throws an error when a Blob's type doesn't match the expected format.
  *
- * @returns {Promise<File[]>} - A promise that resolves with an array of Files.
+ * @returns {File[]} - An array of Files.
  *
  * @throws {Error} - Throws an error if `showErrors` is true and a Blob's type doesn't match the `format`.
  */
-export const blobsToFiles = async (
+export const blobsToFiles = (
   blobs: Blob[],
   format: IMimeTypes,
   showErrors: boolean,
-): Promise<File[]> => {
+): File[] => {
   return blobs.map((blob, i) => {
     if (showErrors) {
       validateBlobType(blob, format);
