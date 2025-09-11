@@ -1,4 +1,8 @@
-import { assertIsValidImageType, assertIsNumber, assertIsPositiveNumber } from '@app/asserts';
+import {
+  assertIsValidImageType,
+  assertIsNumber,
+  assertIsPositiveNumber,
+} from '@app/asserts';
 import { blobsToFiles } from '@app/blobsToFiles';
 import { canvasesToBlobs } from '@app/canvasesToBlobs';
 import { DEFAULT_WIDTH, DEFAULT_HEIGHT } from '@app/constants';

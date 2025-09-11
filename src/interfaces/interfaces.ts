@@ -17,9 +17,9 @@ export type IMimeTypes = (typeof MimeTypesEnum)[keyof typeof MimeTypesEnum];
 
 export type ImageConverter = {
   files: FileList | File[] | null; // FileList object from input
-  width?: number; // Width for output file (optional, defaults to DEFAULT_WIDTH)
-  height?: number; // Height for output file (optional, defaults to DEFAULT_HEIGHT)  
-  format?: IMimeTypes; // Format for output file (optional, defaults to WebP)
+  width?: number; // Width for an output file (optional, defaults to DEFAULT_WIDTH)
+  height?: number; // Height for an output file (optional, defaults to DEFAULT_HEIGHT)
+  format?: IMimeTypes; // Format for an output file (optional, defaults to WebP)
   showErrors?: boolean; // Show in console convert format errors (optional, defaults to false)
 };
 
