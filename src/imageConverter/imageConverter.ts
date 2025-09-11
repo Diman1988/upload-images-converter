@@ -1,11 +1,11 @@
 import {
-  assertIsValidImageType,
   assertIsNumber,
   assertIsPositiveNumber,
+  assertIsValidImageType,
 } from '@app/asserts';
 import { blobsToFiles } from '@app/blobsToFiles';
 import { canvasesToBlobs } from '@app/canvasesToBlobs';
-import { DEFAULT_WIDTH, DEFAULT_HEIGHT } from '@app/constants';
+import { DEFAULT_HEIGHT, DEFAULT_WIDTH } from '@app/constants';
 import { ImageConverter, MimeTypesEnum } from '@app/interfaces';
 import { prepareDataForProcessing } from '@app/prepareDataForProcessing';
 import { processImages } from '@app/processImages';
@@ -49,7 +49,5 @@ export const imageConverter = async ({
 
   const blobs = await canvasesToBlobs(processedImages, format);
 
-  const fileArray = blobsToFiles(blobs, format, showErrors);
-
-  return fileArray;
+  return blobsToFiles(blobs, format, showErrors);
 };

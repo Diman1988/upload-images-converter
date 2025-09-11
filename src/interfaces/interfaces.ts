@@ -26,8 +26,8 @@ export type ImageConverter = {
 export type CropValues = {
   cropX: number;
   cropY: number;
-  cropedWidth: number;
-  cropedHeight: number;
+  croppedWidth: number;
+  croppedHeight: number;
 };
 
 export type CropResult = {

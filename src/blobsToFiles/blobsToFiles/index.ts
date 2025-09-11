@@ -1,5 +1,5 @@
 import { IMimeTypes } from '@app/interfaces';
-import { validateBlobType } from './../validateBlobType';
+import { validateBlobType } from '@app/blobsToFiles';
 import { blobToFile } from './../blobToFile';
 
 /**
