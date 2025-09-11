@@ -1,4 +1,3 @@
-import { assertIsNumber, assertIsPositiveNumber } from '@app/asserts';
 import { calculate } from '@app/calculate';
 import { drawImageOnCanvas } from '@app/drawImageOnCanvas';
 import { scaleImage } from '@app/scaleImage';
@@ -16,12 +15,6 @@ export const processImages = async (
   height: number,
 ): Promise<HTMLCanvasElement> => {
   return new Promise((resolve, reject) => {
-    // Validate input parameters
-    assertIsNumber(width, 'correctWidth');
-    assertIsNumber(height, 'correctHeight');
-    assertIsPositiveNumber(width);
-    assertIsPositiveNumber(height);
-
     // Create a temporary image element to read the file
     const tempImg = new Image();
     tempImg.src = URL.createObjectURL(file); // Convert file to URL

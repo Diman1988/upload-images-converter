@@ -1,4 +1,4 @@
-import { assertIsValidImageType } from '@app/asserts';
+import { assertIsValidImageType, assertIsNumber, assertIsPositiveNumber } from '@app/asserts';
 import { blobsToFiles } from '@app/blobsToFiles';
 import { canvasesToBlobs } from '@app/canvasesToBlobs';
 import { DEFAULT_WIDTH, DEFAULT_HEIGHT } from '@app/constants';
@@ -27,6 +27,12 @@ export const imageConverter = async ({
   if (!files) {
     return [];
   }
+
+  // Validate parameters once at the top level
+  assertIsNumber(width, 'width');
+  assertIsNumber(height, 'height');
+  assertIsPositiveNumber(width);
+  assertIsPositiveNumber(height);
 
   assertIsValidImageType(files);
 
