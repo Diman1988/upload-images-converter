@@ -63,5 +63,8 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "exports": {
+    "./src/*": "./src/*.ts"
+  }
 }

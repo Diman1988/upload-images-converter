@@ -19,6 +19,10 @@
       ]
     }
   },
+  "include": [
+    "src/**/*.ts",
+    "webserver/**/*.ts"
+  ],
   "exclude": [
     "node_modules",
     "cypress",

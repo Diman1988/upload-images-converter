@@ -1,53 +1,82 @@
 import {
-  assertIsNumber,
-  assertIsPositiveNumber,
   assertIsValidImageType,
+  assertIsPositiveNumber,
+  assertIMimeTypes,
 } from '@app/asserts';
 import { blobsToFiles } from '@app/blobsToFiles';
 import { canvasesToBlobs } from '@app/canvasesToBlobs';
-import { DEFAULT_HEIGHT, DEFAULT_WIDTH } from '@app/constants';
-import { ImageConverter, MimeTypesEnum } from '@app/interfaces';
+import { DEFAULT_WIDTH, DEFAULT_HEIGHT } from '@app/constants';
+import { IImageConverterOptions, MimeTypesEnum } from '@app/interfaces';
 import { prepareDataForProcessing } from '@app/prepareDataForProcessing';
 import { processImages } from '@app/processImages';
 
-/**
- * Convert images based on provided options.
- *
- * @param files - FileList object from input
- * @param width - Width for output file (defaults to DEFAULT_WIDTH)
- * @param height - Height for output file (defaults to DEFAULT_HEIGHT)
- * @param format - Format for output file (defaults to WebP)
- * @param showErrors - If true, will show errors in console (defaults to false)
- *
- * @returns An array of processed files.
- */
-export const imageConverter = async ({
-  files,
-  width = DEFAULT_WIDTH,
-  height = DEFAULT_HEIGHT,
-  format = MimeTypesEnum.WEBP,
-  showErrors = false,
-}: ImageConverter): Promise<File[]> => {
-  if (!files) {
-    return [];
+class ImageConverter {
+  protected width: number;
+
+  protected height: number;
+
+  protected format: MimeTypesEnum;
+
+  protected showErrors: boolean;
+
+  constructor(options?: IImageConverterOptions) {
+    const width = options?.width ?? DEFAULT_WIDTH;
+    const height = options?.height ?? DEFAULT_HEIGHT;
+    const format = options?.format ?? MimeTypesEnum.WEBP;
+
+    assertIsPositiveNumber(width);
+    assertIsPositiveNumber(height);
+    assertIMimeTypes(format);
+
+    this.width = width;
+    this.height = height;
+    this.format = format;
+    this.showErrors = options?.showErrors ?? false;
   }
 
-  // Validate parameters once at the top level
-  assertIsNumber(width, 'width');
-  assertIsNumber(height, 'height');
-  assertIsPositiveNumber(width);
-  assertIsPositiveNumber(height);
+  protected async canvasesToBlobs(processedImages: HTMLCanvasElement[]) {
+    const canvases = await canvasesToBlobs(processedImages, this.format);
 
-  // At this point files is guaranteed to be non-null
-  assertIsValidImageType(files);
+    return canvases;
+  }
 
-  const preparedData = prepareDataForProcessing(files);
+  private prepare(files: FileList | File[]) {
+    const preparedData = prepareDataForProcessing(files);
 
-  const processedImages = await Promise.all(
-    preparedData.map((file) => processImages(file, width, height)),
-  );
+    return preparedData;
+  }
 
-  const blobs = await canvasesToBlobs(processedImages, format);
+  protected async processImages(files: File[]) {
+    const processedImages = await Promise.all(
+      files.map((file) => processImages(file, this.width, this.height)),
+    );
 
-  return blobsToFiles(blobs, format, showErrors);
-};
+    return processedImages;
+  }
+
+  private async blobsToFiles(blobs: Blob[]) {
+    const fileArray = await blobsToFiles(blobs, this.format, this.showErrors);
+
+    return fileArray;
+  }
+
+  public async convertImages(files: FileList | File[] | null): Promise<File[]> {
+    if (!files || files.length === 0) {
+      return [];
+    }
+
+    assertIsValidImageType(files);
+
+    const preparedData = this.prepare(files);
+
+    const processedImages = await this.processImages(preparedData);
+
+    const blobs = await this.canvasesToBlobs(processedImages);
+
+    const fileArray = await this.blobsToFiles(blobs);
+
+    return fileArray;
+  }
+}
+
+export { ImageConverter };

@@ -1,5 +1,5 @@
 import 'cypress-file-upload';
-import { imageConverter } from './imageConverter';
+import { imageConverter } from '@app';
 
 describe('Image Formatting Test', () => {
   beforeEach(() => {

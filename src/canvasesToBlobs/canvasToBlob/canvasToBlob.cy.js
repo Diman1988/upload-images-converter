@@ -1,4 +1,4 @@
-import { canvasToBlob } from './';
+import { CanvasConverter } from './';
 
 describe('canvasToBlob', () => {
   let canvas;
@@ -85,7 +85,9 @@ describe('canvasToBlob', () => {
           };
         }
 
-        const promise = canvasToBlob(canvas, mimeType);
+        const converter = new CanvasConverter();
+
+        const promise = converter.canvasToBlob(canvas, mimeType);
 
         if (shouldReject) {
           return promise.then(

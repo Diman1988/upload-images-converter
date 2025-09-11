@@ -1,2 +1,2 @@
 export { canvasesToBlobs } from './canvasesToBlobs';
-export { canvasToBlob } from './canvasToBlob';
+export { CanvasConverter } from './canvasToBlob';

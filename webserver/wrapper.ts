@@ -1,5 +1,5 @@
-import { imageConverter } from './index';
-import { MimeTypesEnum } from './interfaces';
+import { imageConverter } from '@app/index';
+import { MimeTypesEnum } from '@app/interfaces';
 
 function wrapper() {
   console.log('wrapper loaded');
