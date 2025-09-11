@@ -6,7 +6,7 @@ import {
 import { blobsToFiles } from '@app/blobsToFiles';
 import { canvasesToBlobs } from '@app/canvasesToBlobs';
 import { DEFAULT_WIDTH, DEFAULT_HEIGHT } from '@app/constants';
-import { IImageConverterOptions, MimeTypesEnum } from '@app/interfaces'; // Обратите внимание на интерфейс опций
+import { IImageConverterOptions, MimeTypesEnum } from '@app/interfaces';
 import { prepareDataForProcessing } from '@app/prepareDataForProcessing';
 import { processImages } from '@app/processImages';
 
@@ -20,7 +20,6 @@ class ImageConverter {
   protected showErrors: boolean;
 
   constructor(options?: IImageConverterOptions) {
-    // Валидация критических параметров на уровне конструктора
     const width = options?.width ?? DEFAULT_WIDTH;
     const height = options?.height ?? DEFAULT_HEIGHT;
     const format = options?.format ?? MimeTypesEnum.WEBP;
@@ -66,7 +65,7 @@ class ImageConverter {
       return [];
     }
 
-    assertIsValidImageType(files); // TODO: rename or remaster
+    assertIsValidImageType(files);
 
     const preparedData = this.prepare(files);
 
