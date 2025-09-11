@@ -27,7 +27,7 @@ describe('Image Formatting Test', () => {
       cy.get('#fileInput').attachFile({
         fileContent: image1,
         fileName: 'image1_vertical.jpg',
-        mimeType: 'image/jpg',
+        mimeType: 'image/jpeg',
         encoding: 'base64',
       });
 
@@ -71,7 +71,7 @@ describe('Image Formatting Test', () => {
       cy.get('#fileInput').attachFile({
         fileContent: image1,
         fileName: 'image1_vertical.jpg',
-        mimeType: 'image/jpg',
+        mimeType: 'image/jpeg',
         encoding: 'base64',
       });
 
@@ -115,7 +115,7 @@ describe('Image Formatting Test', () => {
       cy.get('#fileInput').attachFile({
         fileContent: image1,
         fileName: 'image2_vertical.jpg',
-        mimeType: 'image/jpg',
+        mimeType: 'image/jpeg',
         encoding: 'base64',
       });
 
@@ -161,13 +161,13 @@ describe('Image Formatting Test', () => {
           {
             fileContent: image1,
             fileName: 'image1_vertical.jpg',
-            mimeType: 'image/jpg',
+            mimeType: 'image/jpeg',
             encoding: 'base64',
           },
           {
             fileContent: image2,
             fileName: 'image2_vertical.jpg',
-            mimeType: 'image/jpg',
+            mimeType: 'image/jpeg',
             encoding: 'base64',
           },
         ]);
@@ -215,7 +215,7 @@ describe('Image Formatting Test', () => {
       cy.get('#fileInput').attachFile({
         fileContent: image1,
         fileName: 'image2_vertical.jpg',
-        mimeType: 'image/jpg',
+        mimeType: 'image/jpeg',
         encoding: 'base64',
       });
 
@@ -239,56 +239,12 @@ describe('Image Formatting Test', () => {
     });
   });
 
-  it('should handle and convert single uploaded image file to image/jpg', () => {
-    cy.get('@image1').then((image1) => {
-      cy.get('#fileInput').attachFile({
-        fileContent: image1,
-        fileName: 'image1_vertical.jpg',
-        mimeType: 'image/jpg',
-        encoding: 'base64',
-      });
-
-      cy.window().then((win) => {
-        // Access the fileInput in the window context
-        const fileInput = win.document.getElementById('fileInput');
-
-        cy.wrap(
-          imageConverter({ files: fileInput.files, format: 'image/jpg' }),
-        ).then((convertedFiles) => {
-          expect(convertedFiles.length).to.equal(1);
-          expect(convertedFiles[0].type).to.equal('image/jpg');
-
-          // Set the converted image as the source for #demo-image
-          const objectUrl = URL.createObjectURL(convertedFiles[0]);
-
-          const img1 = win.document.getElementById('demo-image1');
-          img1.src = objectUrl;
-          img1.style.display = 'block';
-
-          cy.get('#demo-image1')
-            .should('be.visible')
-            .and(($img) => {
-              // your assertions here...
-              expect($img[0].complete).to.be.true;
-
-              expect($img[0].naturalWidth).to.be.greaterThan(0);
-              expect($img[0].naturalHeight).to.be.greaterThan(0);
-              expect($img[0].naturalWidth).to.equal(500); // Expected width after conversion
-              expect($img[0].naturalHeight).to.equal(500); // Expected height after conversion
-              expect($img[0].naturalWidth).to.equal($img[0].width); // Ensure the image is displayed at its natural size
-              expect($img[0].naturalHeight).to.equal($img[0].height); // Ensure the image is displayed at its natural size
-            });
-        });
-      });
-    });
-  });
-
   it('should handle and convert single uploaded image file to image/jpeg', () => {
     cy.get('@image1').then((image1) => {
       cy.get('#fileInput').attachFile({
         fileContent: image1,
-        fileName: 'image1_vertical.jpeg',
-        mimeType: 'image/jpg',
+        fileName: 'image1_vertical.jpg',
+        mimeType: 'image/jpeg',
         encoding: 'base64',
       });
 
@@ -327,12 +283,56 @@ describe('Image Formatting Test', () => {
     });
   });
 
+  it('should handle and convert single uploaded image file to image/avif', () => {
+    cy.get('@image1').then((image1) => {
+      cy.get('#fileInput').attachFile({
+        fileContent: image1,
+        fileName: 'image1_vertical.jpg',
+        mimeType: 'image/jpeg',
+        encoding: 'base64',
+      });
+
+      cy.window().then((win) => {
+        // Access the fileInput in the window context
+        const fileInput = win.document.getElementById('fileInput');
+
+        cy.wrap(
+          imageConverter({ files: fileInput.files, format: 'image/avif' }),
+        ).then((convertedFiles) => {
+          expect(convertedFiles.length).to.equal(1);
+          expect(convertedFiles[0].type).to.equal('image/avif');
+
+          // Set the converted image as the source for #demo-image
+          const objectUrl = URL.createObjectURL(convertedFiles[0]);
+
+          const img1 = win.document.getElementById('demo-image1');
+          img1.src = objectUrl;
+          img1.style.display = 'block';
+
+          cy.get('#demo-image1')
+            .should('be.visible')
+            .and(($img) => {
+              // your assertions here...
+              expect($img[0].complete).to.be.true;
+
+              expect($img[0].naturalWidth).to.be.greaterThan(0);
+              expect($img[0].naturalHeight).to.be.greaterThan(0);
+              expect($img[0].naturalWidth).to.equal(500); // Expected width after conversion
+              expect($img[0].naturalHeight).to.equal(500); // Expected height after conversion
+              expect($img[0].naturalWidth).to.equal($img[0].width); // Ensure the image is displayed at its natural size
+              expect($img[0].naturalHeight).to.equal($img[0].height); // Ensure the image is displayed at its natural size
+            });
+        });
+      });
+    });
+  });
+
   it('should handle and convert single uploaded image file to image/png', () => {
     cy.get('@image1').then((image1) => {
       cy.get('#fileInput').attachFile({
         fileContent: image1,
         fileName: 'image1_vertical.jpeg',
-        mimeType: 'image/jpg',
+        mimeType: 'image/jpeg',
         encoding: 'base64',
       });
 
@@ -376,7 +376,7 @@ describe('Image Formatting Test', () => {
       cy.get('#fileInput').attachFile({
         fileContent: image1,
         fileName: 'image1_vertical.jpeg',
-        mimeType: 'image/jpg',
+        mimeType: 'image/jpeg',
         encoding: 'base64',
       });
 
