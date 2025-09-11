@@ -23,8 +23,16 @@ module.exports = {
     clean: true,
   },
   devServer: {
-    contentBase: './dist',
-    injectClient: false,
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    client: {
+      overlay: false,
+    },
+    port: 3000,
+    open: true,
+    hot: false,
+    liveReload: true,
   },
   resolve: {
     extensions: ['.ts'],

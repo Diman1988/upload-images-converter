@@ -16,7 +16,17 @@ export const blobToFile = (
   index: number,
   format: IMimeTypes,
 ): File => {
-  const type = format.substring(format.indexOf('/') + 1);
+  // Map MIME types to proper file extensions
+  const extensionMap: Record<string, string> = {
+    'image/jpeg': 'jpg',
+    'image/png': 'png',
+    'image/webp': 'webp',
+    'image/avif': 'avif',
+  };
+
+  const extension =
+    extensionMap[format] || format.substring(format.indexOf('/') + 1);
   const uniqueId = Date.now() + index;
-  return new File([blob], `image_${uniqueId}.${type}`, { type: format });
+
+  return new File([blob], `image_${uniqueId}.${extension}`, { type: format });
 };

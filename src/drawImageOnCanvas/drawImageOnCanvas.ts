@@ -20,7 +20,10 @@ export const drawImageOnCanvas = (
   destinationWidth: number,
   destinationHeight: number,
 ) => {
-  const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    throw new Error('Failed to get 2D canvas context');
+  }
   ctx.drawImage(
     img,
     cropX,

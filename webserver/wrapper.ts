@@ -33,7 +33,7 @@ function wrapper() {
 
             return result;
           })
-          .then((reslut) => {
+          .then((result) => {
             const scale = document.getElementById('scale') as HTMLInputElement;
 
             scale.disabled = false;
@@ -52,7 +52,7 @@ function wrapper() {
               }
             };
 
-            return reslut;
+            return result;
           })
           .then((result) => {
             const imageUrl = URL.createObjectURL(files[0]);
@@ -74,6 +74,13 @@ function wrapper() {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-(window as any).wrapper = wrapper;
+// Extend window object with proper typing
+declare global {
+  interface Window {
+    wrapper: typeof wrapper;
+  }
+}
+
+window.wrapper = wrapper;
 
 export { wrapper };

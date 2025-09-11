@@ -3,7 +3,7 @@ import { MimeTypesEnum } from '@app/interfaces';
 /**
  * Asserts that each file in the FileList has a valid image type.
  *
- * @param {FileList} files - The list of files to be validated.
+ * @param {FileList | File[]} files - The list of files to be validated (must not be null).
  *
  * @throws {Error} - Throws an error if any file's type is not a valid image type.
  */

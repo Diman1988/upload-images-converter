@@ -24,6 +24,14 @@ class ImageConverter {
 
   protected async canvasesToBlobs(processedImages: HTMLCanvasElement[]) {
     const canvases = await canvasesToBlobs(processedImages, this.format);
+  // Validate parameters once at the top level
+  assertIsNumber(width, 'width');
+  assertIsNumber(height, 'height');
+  assertIsPositiveNumber(width);
+  assertIsPositiveNumber(height);
+
+  // At this point files is guaranteed to be non-null
+  assertIsValidImageType(files);
 
     return canvases;
   }
@@ -39,8 +47,7 @@ class ImageConverter {
       files.map((file) => processImages(file, this.width, this.height)),
     );
 
-    return processedImages;
-  }
+  const blobs = await canvasesToBlobs(processedImages, format);
 
   private async blobsToFiles(blobs: Blob[]) {
     const fileArray = await blobsToFiles(blobs, this.format, this.showErrors);
@@ -68,3 +75,5 @@ class ImageConverter {
 }
 
 export { ImageConverter };
+  return blobsToFiles(blobs, format, showErrors);
+};

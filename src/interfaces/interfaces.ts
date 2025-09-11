@@ -1,15 +1,14 @@
 // export type IMimeTypes =
 //   | 'image/webp'
 //   | 'image/jpeg'
-//   | 'image/jpg'
 //   | 'image/png';
 
 // TODO: rename later
 export enum MimeTypesEnum {
-  JPEG = 'image/jpeg',
-  JPG = 'image/jpg',
-  PNG = 'image/png',
   WEBP = 'image/webp',
+  AVIF = 'image/avif',
+  JPEG = 'image/jpeg',
+  PNG = 'image/png',
 }
 
 export type IMimeTypesKeys = keyof typeof MimeTypesEnum;
@@ -18,17 +17,17 @@ export type IMimeTypes = (typeof MimeTypesEnum)[keyof typeof MimeTypesEnum];
 
 export type ImageConverter = {
   files: FileList | File[] | null; // FileList object from input
-  width: number; // Width for output file
-  height: number; // Height for output file
-  format: IMimeTypes; // Format for output file (webp could be png for some browsers)
-  showErrors: boolean; // Show in console convert format errors
+  width?: number; // Width for an output file (optional, defaults to DEFAULT_WIDTH)
+  height?: number; // Height for an output file (optional, defaults to DEFAULT_HEIGHT)
+  format?: IMimeTypes; // Format for an output file (optional, defaults to WebP)
+  showErrors?: boolean; // Show in console convert format errors (optional, defaults to false)
 };
 
 export type CropValues = {
   cropX: number;
   cropY: number;
-  cropedWidth: number;
-  cropedHeight: number;
+  croppedWidth: number;
+  croppedHeight: number;
 };
 
 export type CropResult = {
