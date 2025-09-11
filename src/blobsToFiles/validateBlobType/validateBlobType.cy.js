@@ -3,8 +3,8 @@ import { validateBlobType } from './';
 describe('validateBlobType', () => {
   it('should throw an error when the Blob type does not match the expected type', () => {
     const blob = new Blob([], { type: 'image/png' });
-    expect(() => validateBlobType(blob, 'image/jpg')).to.throw(
-      `Blob type validation failed: got image/png, expected image/jpg`,
+    expect(() => validateBlobType(blob, 'image/jpeg')).to.throw(
+      `Blob type validation failed: got image/png, expected image/jpeg`,
     );
   });
 
