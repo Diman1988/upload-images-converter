@@ -1,4 +1,8 @@
-import { assertIsValidImageType } from '@app/asserts';
+import {
+  assertIsValidImageType,
+  assertIsPositiveNumber,
+  assertIMimeTypes,
+} from '@app/asserts';
 import { blobsToFiles } from '@app/blobsToFiles';
 import { canvasesToBlobs } from '@app/canvasesToBlobs';
 import { DEFAULT_WIDTH, DEFAULT_HEIGHT } from '@app/constants';
@@ -16,9 +20,18 @@ class ImageConverter {
   protected showErrors: boolean;
 
   constructor(options?: IImageConverterOptions) {
-    this.width = options?.width ?? DEFAULT_WIDTH;
-    this.height = options?.height ?? DEFAULT_HEIGHT;
-    this.format = options?.format ?? MimeTypesEnum.WEBP;
+    // Валидация критических параметров на уровне конструктора
+    const width = options?.width ?? DEFAULT_WIDTH;
+    const height = options?.height ?? DEFAULT_HEIGHT;
+    const format = options?.format ?? MimeTypesEnum.WEBP;
+
+    assertIsPositiveNumber(width);
+    assertIsPositiveNumber(height);
+    assertIMimeTypes(format);
+
+    this.width = width;
+    this.height = height;
+    this.format = format;
     this.showErrors = options?.showErrors ?? false;
   }
 
