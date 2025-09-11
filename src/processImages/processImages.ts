@@ -1,4 +1,3 @@
-import { assertIsNumber, assertIsPositiveNumber } from '@app/asserts';
 import { calculate } from '@app/calculate';
 import { drawImageOnCanvas } from '@app/drawImageOnCanvas';
 import { scaleImage } from '@app/scaleImage';
@@ -16,18 +15,26 @@ export const processImages = async (
   height: number,
 ): Promise<HTMLCanvasElement> => {
   return new Promise((resolve, reject) => {
-    // Validate input parameters
-    assertIsNumber(width, 'correctWidth');
-    assertIsNumber(height, 'correctHeight');
-    assertIsPositiveNumber(width);
-    assertIsPositiveNumber(height);
-
     // Create a temporary image element to read the file
     const tempImg = new Image();
     tempImg.src = URL.createObjectURL(file); // Convert file to URL
 
+    // Set up timeout for image loading (10 seconds)
+    const timeoutId = setTimeout(() => {
+      URL.revokeObjectURL(tempImg.src);
+      reject(new Error(`Image loading timeout for file: ${file.name}`));
+    }, 10000);
+
+    const cleanup = () => {
+      clearTimeout(timeoutId);
+      URL.revokeObjectURL(tempImg.src);
+    };
+
     // Handle image load error
-    tempImg.onerror = (): void => reject(new Error('Image load error'));
+    tempImg.onerror = (): void => {
+      cleanup();
+      reject(new Error(`Image load error for file: ${file.name}`));
+    };
 
     // Handle image load success
     tempImg.onload = (): void => {
@@ -72,13 +79,18 @@ export const processImages = async (
         );
 
         // Release resources associated with the temporary image URL
+        clearTimeout(timeoutId);
         URL.revokeObjectURL(tempImg.src);
 
         // Resolve the promise with the processed canvas
         resolve(canvas);
-      } catch (error: any) {
+      } catch (error: unknown) {
+        // Clean up on error
+        cleanup();
         // Reject the promise if any error occurs during image processing
-        reject(new Error(`Image processing error: ${error.message}`));
+        const errorMessage =
+          error instanceof Error ? error.message : 'Unknown error';
+        reject(new Error(`Image processing error: ${errorMessage}`));
       }
     };
   });

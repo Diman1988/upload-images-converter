@@ -66,7 +66,7 @@ describe('Image File Upload Tests', () => {
         },
         (error) => {
           expect(error.message).to.equal(
-            'Invalid image types detected: text/plain. Supported types are: image/webp, image/jpg, image/jpeg, image/png',
+            'Invalid image types detected: text/plain. Supported types are: image/webp, image/avif, image/jpeg, image/png',
           );
           return null; // Чтобы вернуться из ошибки и продолжить цепочку
         },
