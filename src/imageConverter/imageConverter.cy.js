@@ -224,38 +224,13 @@ describe('Image Formatting Test', () => {
   });
 
   it('should handle single uploaded image file correctly with wrong resolution -700 * 1000', () => {
-    const converter = new ImageConverter({
-      width: -700,
-      height: 1000,
-    });
-
-    cy.get('@image2').then((image1) => {
-      cy.get('#fileInput').attachFile({
-        fileContent: image1,
-        fileName: 'image2_vertical.jpg',
-        mimeType: 'image/jpeg',
-        encoding: 'base64',
+    // Test that constructor validation works correctly for negative width
+    expect(() => {
+      new ImageConverter({
+        width: -700,
+        height: 1000,
       });
-
-      cy.window().then((win) => {
-        // Access the fileInput in the window context
-        const fileInput = win.document.getElementById('fileInput');
-
-        // Call the imageConverter function and expect it to throw an error
-        converter
-          .convertImages(fileInput.files)
-          .then(() => {
-            // The promise should not resolve, so fail the test if it does
-            expect.fail('Expected promise to be rejected but it was resolved.');
-          })
-          .catch((error) => {
-            // Check if the error message matches the expected message
-            expect(error.message).to.equal(
-              'Invalid input: correctWidth and correctHeight must be positive numbers',
-            );
-          });
-      });
-    });
+    }).to.throw('Expected a positive number, but received -700');
   });
 
   it('should handle and convert single uploaded image file to image/jpg', () => {
