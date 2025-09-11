@@ -4,8 +4,8 @@ describe('assertIMimeTypes function', () => {
   it('should not throw an error for supported formats', () => {
     const supportedFormats = [
       'image/webp',
+      'image/avif',
       'image/jpeg',
-      'image/jpg',
       'image/png',
     ];
 
