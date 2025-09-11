@@ -1,5 +1,5 @@
 import { MimeTypesEnum } from '@app/interfaces';
-import { ImageConverter } from './imageConverter/imageConverter';
+import { ImageConverter } from '@app/imageConverter';
 
 async function imageConverter({
   files,
