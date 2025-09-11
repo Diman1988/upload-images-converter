@@ -17,10 +17,10 @@ export type IMimeTypes = (typeof MimeTypesEnum)[keyof typeof MimeTypesEnum];
 
 export type ImageConverter = {
   files: FileList | File[] | null; // FileList object from input
-  width: number; // Width for output file
-  height: number; // Height for output file
-  format: IMimeTypes; // Format for output file (webp could be png for some browsers)
-  showErrors: boolean; // Show in console convert format errors
+  width?: number; // Width for output file (optional, defaults to DEFAULT_WIDTH)
+  height?: number; // Height for output file (optional, defaults to DEFAULT_HEIGHT)  
+  format?: IMimeTypes; // Format for output file (optional, defaults to WebP)
+  showErrors?: boolean; // Show in console convert format errors (optional, defaults to false)
 };
 
 export type CropValues = {

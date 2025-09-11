@@ -10,10 +10,10 @@ import { processImages } from '@app/processImages';
  * Convert images based on provided options.
  *
  * @param files - FileList object from input
- * @param width - Width for output file. Default is DEFAULT_WIDTH.
- * @param height - Height for output file. Default is DEFAULT_HEIGHT.
- * @param format - Format for output file. Default is webp (could be png for some browsers).
- * @param showErrors - If true, will show errors in console. Default is false.
+ * @param width - Width for output file (defaults to DEFAULT_WIDTH)
+ * @param height - Height for output file (defaults to DEFAULT_HEIGHT)
+ * @param format - Format for output file (defaults to WebP)
+ * @param showErrors - If true, will show errors in console (defaults to false)
  *
  * @returns An array of processed files.
  */
@@ -34,6 +34,7 @@ export const imageConverter = async ({
   assertIsPositiveNumber(width);
   assertIsPositiveNumber(height);
 
+  // At this point files is guaranteed to be non-null
   assertIsValidImageType(files);
 
   const preparedData = prepareDataForProcessing(files);
