@@ -21,6 +21,7 @@ export const blobToFile = (
     'image/jpeg': 'jpg',
     'image/png': 'png',
     'image/webp': 'webp',
+    'image/avif': 'avif',
   };
 
   const extension =

@@ -1,13 +1,12 @@
 // export type IMimeTypes =
 //   | 'image/webp'
 //   | 'image/jpeg'
-//   | 'image/jpg'
 //   | 'image/png';
 
 // TODO: rename later
 export enum MimeTypesEnum {
   WEBP = 'image/webp',
-  JPG = 'image/jpg',
+  AVIF = 'image/avif',
   JPEG = 'image/jpeg',
   PNG = 'image/png',
 }
