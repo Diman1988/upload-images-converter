@@ -22,6 +22,10 @@ async function imageConverter({
 }
 
 export { ImageConverter } from '@app/imageConverter';
-export { IMimeTypes, IImageConverterOptions } from '@app/interfaces';
+export {
+  IMimeTypes,
+  IImageConverterOptions,
+  MimeTypesEnum,
+} from '@app/interfaces';
 
 export { imageConverter };

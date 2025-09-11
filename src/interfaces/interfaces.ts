@@ -19,7 +19,7 @@ export type ImageConverter = {
   files: FileList | File[] | null; // FileList object from input
   width?: number; // Width for an output file (optional, defaults to DEFAULT_WIDTH)
   height?: number; // Height for an output file (optional, defaults to DEFAULT_HEIGHT)
-  format?: IMimeTypes; // Format for an output file (optional, defaults to WebP)
+  format?: MimeTypesEnum; // Format for an output file (optional, defaults to WebP)
   showErrors?: boolean; // Show in console convert format errors (optional, defaults to false)
 };
 
