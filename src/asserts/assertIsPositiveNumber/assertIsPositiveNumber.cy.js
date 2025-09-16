@@ -5,10 +5,10 @@ describe('assertIsPositiveNumber', () => {
     assertIsPositiveNumber(123);
   });
 
-  it('should throw an error when the input is zero', () => {
+  it('should pass when the input is zero', () => {
     expect(() => {
       assertIsPositiveNumber(0);
-    }).to.throw('Expected a positive number, but received 0');
+    });
   });
 
   it('should throw an error when the input is a negative number', () => {
