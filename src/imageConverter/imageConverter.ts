@@ -24,8 +24,6 @@ class ImageConverter {
     const height = options?.height ?? DEFAULT_HEIGHT;
     const format = options?.format ?? MimeTypesEnum.WEBP;
 
-    assertIsPositiveNumber(width);
-    assertIsPositiveNumber(height);
     assertIMimeTypes(format);
 
     this.width = width;
