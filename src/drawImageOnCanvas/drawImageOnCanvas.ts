@@ -24,6 +24,10 @@ export const drawImageOnCanvas = (
   if (!ctx) {
     throw new Error('Failed to get 2D canvas context');
   }
+
+  // Set high quality scaling
+  ctx.imageSmoothingQuality = 'high';
+
   ctx.drawImage(
     img,
     cropX,
